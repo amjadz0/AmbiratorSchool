@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الإمبراطور — اختيار مستوى الصعوبة</title>
+    <link rel="stylesheet" href="css/style.css" />
+   <style>/* ============================================
+   متغيرات التصميم — لوحة ألوان نيون متدرجة
+   ============================================ */
+:root {
+    --btn-height: 72px;
+    --btn-min-width: 200px;
+    --btn-padding: 12px 20px;
+    --icon-size: 60px;
+    --border-radius: 20px;
+    --transition-speed: 0.4s;
+    
+    /* ألوان نيون حديثة */
+    --light-start: #00ff9d;
+    --light-end: #00d4ff;
+    --medium-start: #ffd387;
+    --medium-end: #ff9800;
+    --heavy-start: #ff4d94;
+    --heavy-end: #ff006e;
+    --pro-start: #ff00cc;
+    --pro-end: #00ccff;
+    
+    /* خلفيات شفافة (Glassmorphism) */
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.25);
+    --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    
+    /* ظلال ديناميكية */
+    --shadow-soft: 0 15px 35px rgba(0, 0, 0, 0.1);
+    --shadow-hover: 0 25px 50px rgba(0, 0, 0, 0.2);
+    --shadow-selected: 0 0 0 4px currentColor;
+    
+    /* تباين النصوص */
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.85);
+}
+
+/* خلفية الصفحة المتدرجة */
+body {
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    min-height: 100vh;
+    font-family: 'Segoe UI', 'Noto Naskh Arabic', Tahoma, sans-serif;
+}
+
+/* ============================================
+   رأس الصفحة
+   ============================================ */
+.difficulty-header {
+    text-align: center;
+    margin-bottom: 40px;
+    animation: fadeInDown 0.8s ease-out;
+}
+
+.difficulty-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0;
+    background: linear-gradient(45deg, var(--text-primary), var(--pro-end));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.difficulty-subtitle {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-top: 8px;
+    opacity: 0.9;
+}
+
+
+/* ============================================
+   حاوية الأزرار — التخطيط
+   ============================================ */
+.modes-wrapper {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 24px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+
+/* ============================================
+   زر الوضع — التصميم المتقدم
+   ============================================ */
+.mode-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    min-width: var(--btn-min-width);
+    height: var(--btn-height);
+    padding: var(--btn-padding);
+    border: 1px solid var(--glass-border);
+    border-radius: var(--border-radius);
+    background: var(--glass-bg);
+    color: var(--text-primary);
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-soft);
+    transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform, box-shadow;
+    overflow: hidden;
+}
+
+/* تأثير الشريط المضيء */
+.mode-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.6s;
+}
+
+.mode-btn:hover::before {
+    left: 100%;
+}
+
+/* حالات التفاعل */
+.mode-btn:hover {
+    transform: translateY(-5px) scale(1.03);
+    box-shadow: var(--shadow-hover);
+}
+
+.mode-btn:active {
+    transform: translateY(-2px) scale(0.98);
+}
+
+.mode-btn:focus {
+    outline: 3px solid currentColor;
+    outline-offset: 3px;
+}
+
+/* الوضع المختار */
+.mode-btn[aria-selected="true"] {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-selected);
+    border-color: currentColor;
+    z-index: 2;
+}
+
+
+/* ============================================
+   أيقونة الزر — مع تأثيرات ثلاثية الأبعاد
+   ============================================ */
+.mode-icon-wrapper {
+    width: var(--icon-size);
+    height: var(--icon-size);
+    flex-shrink: 0;
+    perspective: 1000px;
+}
+
+.mode-icon {
+    width: 100%;
+    height: 100%;
+    transition: transform var(--transition-speed);
+}
+
+.mode-btn:hover .mode-icon {
+    transform: scale(1.1) rotateY(10deg);
+}
+
+
+/* ============================================
+   محتوى الزر — النصوص
+   ============================================ */
+.mode-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: right;
+    flex: 1;
+    min-width: 0;
+}
+
+.mode-label {
+    font-weight: 700;
+    font-size: 1.1rem;
+    line-height: 1.2;
+    letter-spacing: 0.5px;
+}
+
+.mode-desc {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    opacity: 0.9;
+}
+
+
+/* ============================================
+   الشارات (Badges)
+   ============================================ */
+.mode-badge {
+    margin-right: auto;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid currentColor;
+    color: currentColor;
+}
+
+.mode-badge.vip {
+    background: linear-gradient(45deg, #ffd700, #ffed4e);
+    color: #1a1a1a;
+    animation: vip-pulse 2s infinite;
+}
+
+@keyframes vip-pulse {
+    0%, 100% { box-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+    50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.8); }
+}
+
+
+/* ============================================
+   أنماط خاصة بكل وضع — الألوان النيون
+   ============================================ */
+.mode-btn.light {
+    color: var(--light-start);
+}
+
+.mode-btn.medium {
+    color: var(--medium-start);
+}
+
+.mode-btn.heavy {
+    color: var(--heavy-start);
+}
+
+.mode-btn.pro {
+    color: var(--pro-start);
+}
+
+
+/* ============================================
+   منطقة المعاينة — تصميم Glassmorphism
+   ============================================ */
+.preview-box {
+    margin-top: 40px;
+    padding: 24px;
+    border-radius: var(--border-radius);
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px);
+    box-shadow: var(--shadow-soft);
+    transition: all var(--transition-speed);
+}
+
+.preview-content {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.preview-visual {
+    width: 60px;
+    height: 60px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    background: currentColor;
+    opacity: 0.2;
+    transition: all var(--transition-speed);
+    animation: preview-pulse 2s infinite;
+}
+
+.preview-text {
+    flex: 1;
+}
+
+.preview-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 0 8px 0;
+    color: var(--text-primary);
+}
+
+.preview-desc {
+    margin: 0;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+
+/* ============================================
+   الرسوم المتحركة — تأثيرات حية
+   ============================================ */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes preview-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.2; }
+    50% { transform: scale(1.1); opacity: 0.3; }
+}
+
+/* تأثيرات خاصة بكل أيقونة */
+.mode-btn.light .pulse-dot {
+    animation: light-pulse 2s infinite;
+}
+
+@keyframes light-pulse {
+    0%, 100% { r: 5; opacity: 0.6; }
+    50% { r: 7; opacity: 1; }
+}
+
+.mode-btn.medium .bar {
+    animation: bar-grow 1.6s infinite;
+}
+
+.mode-btn.medium .bar:nth-child(1) { animation-delay: 0s; }
+.mode-btn.medium .bar:nth-child(2) { animation-delay: 0.3s; }
+.mode-btn.medium .bar:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes bar-grow {
+    0%, 100% { transform: scaleY(1); }
+    50% { transform: scaleY(1.2); }
+}
+
+.mode-btn.heavy .particle {
+    animation: particle-float 1.8s infinite ease-in-out;
+}
+
+.mode-btn.heavy .particle:nth-child(1) { animation-delay: 0s; }
+.mode-btn.heavy .particle:nth-child(2) { animation-delay: 0.2s; }
+.mode-btn.heavy .particle:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes particle-float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+.mode-btn.pro .star-rotate {
+    animation: star-twinkle 2.6s infinite;
+}
+
+@keyframes star-twinkle {
+    0%, 100% { transform: scale(0.9) rotate(0deg); }
+    50% { transform: scale(1.1) rotate(18deg); }
+}
+
+.mode-btn.pro .flame {
+    animation: flame-flicker 0.9s infinite;
+}
+
+@keyframes flame-flicker {
+    0%, 100% { ry: 8; }
+    50% { ry: 12; }
+}
+
+
+/* ============================================
+   التصميم المتجاوب
+   ============================================ */
+@media (max-width: 768px) {
+    .modes-wrapper {
+        grid-template-columns: 1fr;
+    }
+    
+    .mode-btn {
+        width: 100%;
+    }
+    
+    .difficulty-title {
+        font-size: 2rem;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --btn-height: 68px;
+        --icon-size: 52px;
+    }
+    
+    .difficulty-title {
+        font-size: 1.5rem;
+    }
+    
+    .preview-content {
+        flex-direction: column;
+        text-align: center;
+    }
+}</style>
+</head>
+<body class="default">
+    <main class="difficulty-container">
+        <div class="difficulty-header">
+            <h2 class="difficulty-title">اختر مستوى الصعوبة</h2>
+            <p class="difficulty-subtitle">كل مستوى يقدّم تجربة فريدة مصمّمة خصيصاً لك</p>
+        </div>
+
+        <div class="modes-wrapper" role="tablist" aria-label="مستويات الصعوبة">
+            <!-- خفيف -->
+            <button class="mode-btn light" data-mode="light" role="tab" aria-selected="false" aria-controls="previewBox">
+                <div class="mode-icon-wrapper">
+                    <svg class="mode-icon" viewBox="0 0 64 64" aria-hidden="true">
+                        <defs>
+                            <radialGradient id="light-gradient">
+                                <stop offset="0%" stop-color="#00ff9d" />
+                                <stop offset="100%" stop-color="#00d4ff" />
+                            </radialGradient>
+                        </defs>
+                        <circle class="glow-bg" cx="32" cy="32" r="18" fill="url(#light-gradient)" />
+                        <circle class="pulse-dot" cx="32" cy="32" r="6" fill="#fff" />
+                    </svg>
+                </div>
+                <div class="mode-info">
+                    <span class="mode-label">خفيف</span>
+                    <span class="mode-desc">بداية مريحة مع إرشادات تفاعلية</span>
+                </div>
+                <div class="mode-badge">مبتدئ</div>
+            </button>
+
+            <!-- متوسط -->
+            <button class="mode-btn medium" data-mode="medium" role="tab" aria-selected="false" aria-controls="previewBox">
+                <div class="mode-icon-wrapper">
+                    <svg class="mode-icon" viewBox="0 0 64 64" aria-hidden="true">
+                        <rect class="bar" x="12" y="28" width="8" height="24" rx="2" fill="#ffd387" />
+                        <rect class="bar" x="28" y="20" width="8" height="32" rx="2" fill="#ffb74d" />
+                        <rect class="bar" x="44" y="12" width="8" height="40" rx="2" fill="#ff9800" />
+                    </svg>
+                </div>
+                <div class="mode-info">
+                    <span class="mode-label">متوسط</span>
+                    <span class="mode-desc">تحدٍّ متوازن مع ميزات متقدمة</span>
+                </div>
+                <div class="mode-badge">محترف</div>
+            </button>
+
+            <!-- ثقيل -->
+            <button class="mode-btn heavy" data-mode="heavy" role="tab" aria-selected="false" aria-controls="previewBox">
+                <div class="mode-icon-wrapper">
+                    <svg class="mode-icon" viewBox="0 0 64 64" aria-hidden="true">
+                        <g class="particles">
+                            <circle class="particle" cx="20" cy="36" r="5" fill="#ff4d94" />
+                            <circle class="particle" cx="32" cy="20" r="7" fill="#ff2d92" />
+                            <circle class="particle" cx="44" cy="44" r="9" fill="#ff006e" />
+                        </g>
+                    </svg>
+                </div>
+                <div class="mode-info">
+                    <span class="mode-label">ثقيل</span>
+                    <span class="mode-desc">تحدٍّ قوي للخبراء</span>
+                </div>
+                <div class="mode-badge">خبير</div>
+            </button>
+
+            <!-- متخصص -->
+            <button class="mode-btn pro" data-mode="pro" role="tab" aria-selected="false" aria-controls="previewBox">
+                <div class="mode-icon-wrapper">
+                    <svg class="mode-icon" viewBox="0 0 64 64" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="pro-gradient" x1="0%" x2="100%">
+                                <stop offset="0%" stop-color="#ff00cc" />
+                                <stop offset="100%" stop-color="#00ccff" />
+                            </linearGradient>
+                            <filter id="pro-glow" x="-50%" y="-50%" width="200%" height="200%">
+                                <feGaussianBlur stdDeviation="4" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <g class="rocket-group">
+                            <path d="M34 10 L42 28 L34 46 L26 28 Z" fill="url(#pro-gradient)" filter="url(#pro-glow)" />
+                            <circle cx="32" cy="28" r="4" fill="#08213a" />
+                            <ellipse class="flame" cx="32" cy="54" rx="6" ry="8" fill="#ffd07a" />
+                            <g class="star-rotate">
+                                <polygon points="2,0 3,3 6,3.5 3.8,5.8 4.3,9 2,7.2 -0.3,9 0.2,5.8 -1.8,3.5 1,3" fill="#fff" />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div class="mode-info">
+                    <span class="mode-label">متخصص ✨</span>
+                    <span class="mode-desc">أقصى قدرات مع إعدادات احترافية</span>
+                </div>
+                <div class="mode-badge vip">VIP</div>
+            </button>
+        </div>
+
+        <section class="preview-box" id="previewBox" aria-live="polite">
+            <div class="preview-content">
+                <div class="preview-visual" id="previewVisual"></div>
+                <div class="preview-text">
+                    <h3 class="preview-title" id="previewTitle">معاينة مستوى الصعوبة</h3>
+                    <p class="preview-desc" id="previewExplanation">اختر مستوى لتشاهد التأثيرات الحية</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="g.js">/**
+ * @file محسّن — مع تأثيرات بصرية متقدمة
+ */
+
+class DifficultySelectorEnhanced {
+    constructor() {
+        this.modeButtons = document.querySelectorAll('.mode-btn');
+        this.previewBox = document.getElementById('previewBox');
+        this.previewTitle = document.getElementById('previewTitle');
+        this.previewDesc = document.getElementById('previewExplanation');
+        this.previewVisual = document.getElementById('previewVisual');
+        
+        this.init();
+    }
+
+    modeData = {
+        light: {
+            title: '🌟 خفيف — بداية مريحة',
+            desc: 'تجربة سلسة مع إرشادات تفاعلية وخطوات واضحة',
+            color: '#00ff9d'
+        },
+        medium: {
+            title: '📊 متوسط — التوازن المثالي',
+            desc: 'مزيج مثالي بين التحدي والمتعة مع ميزات ذكية',
+            color: '#ffb74d'
+        },
+        heavy: {
+            title: '⚡ ثقيل — للخبراء فقط',
+            desc: 'تحديات معقدة، مؤثرات قوية، وسرعة فائقة',
+            color: '#ff006e'
+        },
+        pro: {
+            title: '🚀 متخصص — تجربة VIP',
+            desc: 'إمكانيات غير محدودة، إعدادات احترافية، وتصميم فريد',
+            color: '#ff00cc'
+        }
+    };
+
+    init() {
+        this.bindEvents();
+        this.loadSavedMode();
+    }
+
+    bindEvents() {
+        this.modeButtons.forEach(btn => {
+            // دعم النقر
+            btn.addEventListener('click', () => this.setMode(btn.dataset.mode));
+            
+            // دعم المفاتيح
+            btn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.setMode(btn.dataset.mode);
+                }
+            });
+
+            // تأثيرات hover على معاينة مباشرة
+            btn.addEventListener('mouseenter', () => {
+                this.previewVisual.style.background = getComputedStyle(btn).color;
+                this.previewVisual.style.opacity = '0.3';
+            });
+        });
+    }
+
+    setMode(mode) {
+        localStorage.setItem('difficultyMode', mode);
+        this.updateButtonStates(mode);
+        this.updatePreview(mode);
+        this.updateBodyClass(mode);
+        
+        // تأثير انتقال للمعاينة
+        this.animatePreviewTransition();
+        
+        window.dispatchEvent(new CustomEvent('difficultyChanged', { detail: { mode } }));
+    }
+
+    updateButtonStates(mode) {
+        this.modeButtons.forEach(btn => {
+            const isSelected = btn.dataset.mode === mode;
+            btn.setAttribute('aria-selected', isSelected);
+            btn.setAttribute('tabindex', isSelected ? '0' : '-1');
+        });
+    }
+
+    updatePreview(mode) {
+        const data = this.modeData[mode];
+        if (!data) return;
+
+        this.previewTitle.textContent = data.title;
+        this.previewDesc.textContent = data.desc;
+        this.previewVisual.style.background = data.color;
+        this.previewVisual.style.opacity = '0.2';
+    }
+
+    animatePreviewTransition() {
+        this.previewBox.style.transform = 'scale(0.95)';
+        this.previewBox.style.opacity = '0.7';
+        
+        requestAnimationFrame(() => {
+            this.previewBox.style.transform = '';
+            this.previewBox.style.opacity = '';
+        });
+    }
+
+    updateBodyClass(mode) {
+        document.body.classList.remove('mode-light', 'mode-medium', 'mode-heavy', 'mode-pro');
+        document.body.classList.add(`mode-${mode}`);
+    }
+
+    loadSavedMode() {
+        const savedMode = localStorage.getItem('difficultyMode') || 'light';
+        this.setMode(savedMode);
+    }
+}
+
+// تهيئة
+document.addEventListener('DOMContentLoaded', () => {
+    new DifficultySelectorEnhanced();
+});</script>
+</body>
+</html>

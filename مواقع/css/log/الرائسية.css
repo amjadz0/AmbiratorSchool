@@ -1,0 +1,449 @@
+/* 📁 الرائسية.css */
+
+
+/* ------------- الثيمات الجديدة (13 ثيم) ------------- */
+
+:root {
+    --bg-color: #f0f2f5;
+    --text-color: #222;
+    --primary-color: #007bff;
+    --button-bg: #e0e0e0;
+    --sidebar-bg: #fff;
+}
+
+body.default {
+    --bg-color: #f0f2f5;
+    --text-color: #222;
+    --primary-color: #007bff;
+    --button-bg: #e0e0e0;
+    --sidebar-bg: #fff;
+}
+
+body.dark {
+    --bg-color: #121212;
+    --text-color: #eee;
+    --primary-color: #3399ff;
+    --button-bg: #333;
+    --sidebar-bg: #1f1f1f;
+}
+
+body.pink {
+    --bg-color: #ffe6f0;
+    --text-color: #660033;
+    --primary-color: #ff66b2;
+    --button-bg: #ffb3d9;
+    --sidebar-bg: #ffd6e8;
+}
+
+body.blueanime {
+    --bg-color: #e0f0ff;
+    --text-color: #003366;
+    --primary-color: #3399ff;
+    --button-bg: #99ccff;
+    --sidebar-bg: #cce6ff;
+}
+
+body.theme1 {
+    --bg-color: #fff8e1;
+    --text-color: #5d4037;
+    --primary-color: #ffb300;
+    --button-bg: #ffecb3;
+    --sidebar-bg: #fff3e0;
+}
+
+body.theme2 {
+    --bg-color: #e8f5e9;
+    --text-color: #1b5e20;
+    --primary-color: #4caf50;
+    --button-bg: #c8e6c9;
+    --sidebar-bg: #dcedc8;
+}
+
+body.theme3 {
+    --bg-color: #e3f2fd;
+    --text-color: #0d47a1;
+    --primary-color: #2196f3;
+    --button-bg: #bbdefb;
+    --sidebar-bg: #bbdefb;
+}
+
+body.theme4 {
+    --bg-color: #fbe9e7;
+    --text-color: #bf360c;
+    --primary-color: #ff5722;
+    --button-bg: #ffccbc;
+    --sidebar-bg: #ffccbc;
+}
+
+body.theme5 {
+    --bg-color: #ede7f6;
+    --text-color: #311b92;
+    --primary-color: #673ab7;
+    --button-bg: #d1c4e9;
+    --sidebar-bg: #d1c4e9;
+}
+
+body.theme6 {
+    --bg-color: #f3e5f5;
+    --text-color: #4a148c;
+    --primary-color: #9c27b0;
+    --button-bg: #e1bee7;
+    --sidebar-bg: #e1bee7;
+}
+
+body.theme7 {
+    --bg-color: #fff3e0;
+    --text-color: #e65100;
+    --primary-color: #ff9800;
+    --button-bg: #ffe0b2;
+    --sidebar-bg: #ffe0b2;
+}
+
+body.theme8 {
+    --bg-color: #e0f7fa;
+    --text-color: #006064;
+    --primary-color: #00bcd4;
+    --button-bg: #b2ebf2;
+    --sidebar-bg: #b2ebf2;
+}
+
+body.theme9 {
+    --bg-color: #f9fbe7;
+    --text-color: #827717;
+    --primary-color: #cddc39;
+    --button-bg: #f0f4c3;
+    --sidebar-bg: #f0f4c3;
+}
+
+
+/* --------- اللغة والاتجاه --------- */
+
+.lang-ar {
+    direction: rtl;
+    text-align: right;
+}
+
+.lang-en,
+.lang-fr,
+.lang-es,
+.lang-it,
+.lang-ja,
+.lang-ko,
+.lang-zh {
+    direction: ltr;
+    text-align: left;
+}
+
+
+/* --------- أنيميشن --------- */
+
+.fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* --------- التنسيقات العامة المعتمدة على الثيم --------- */
+
+body {
+    font-family: 'Cairo', 'Tajawal', sans-serif;
+    transition: background-color 0.5s ease, color 0.5s ease;
+    margin: 0;
+    padding: 0;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+header.main-header,
+footer.main-footer {
+    padding: 1rem;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.2);
+    /* خلفية شفافة قليلاً لتبقى متناسقة */
+}
+
+.main-content {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+
+/* --------- مربعات وأزرار --------- */
+
+#tab-content {
+    text-align: center;
+    padding: 20px;
+    margin-top: 15px;
+    background-color: var(--sidebar-bg);
+    color: var(--text-color);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin: 40px 0;
+}
+
+.img-btn {
+    border: none;
+    background: var(--primary-color);
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    position: relative;
+    border-radius: 12px;
+    padding: 15px 25px;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+    width: 180px;
+}
+
+.img-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 20px var(--primary-color);
+    filter: brightness(1.1);
+}
+
+.img-btn img {
+    width: 150px;
+    height: auto;
+    border-radius: 15px;
+}
+
+.img-btn span {
+    display: block;
+    margin-top: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.info-tabs button {
+    margin: 0.3rem;
+    padding: 0.7rem 1.2rem;
+    font-size: 1rem;
+    border-radius: 15px;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.info-tabs button:hover {
+    filter: brightness(1.1);
+    transform: scale(1.03);
+}
+
+.info-box {
+    max-width: 700px;
+    background: var(--sidebar-bg);
+    color: var(--text-color);
+    padding: 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    min-height: 200px;
+}
+
+
+/* --------- أدوات اختيار اللغة والثيم --------- */
+
+.lang-theme-switcher {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 1rem;
+}
+
+.lang-theme-switcher select {
+    margin: 0 0.5rem;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--button-bg);
+    color: var(--text-color);
+}
+
+
+/* --- تنسيقات قائمة اختيار الثيم الجديدة --- */
+
+.theme-select {
+    position: relative;
+    display: inline-block;
+}
+
+.theme-select>button {
+    background-color: var(--button-bg);
+    color: var(--text-color);
+    border: none;
+    padding: 10px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 16px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.theme-list {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--sidebar-bg);
+    border-radius: 12px;
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.15);
+    display: none;
+    flex-direction: column;
+    max-height: 240px;
+    overflow-y: auto;
+    width: 195px;
+    z-index: 10000;
+    margin-top: 5px;
+}
+
+.theme-list.show {
+    display: flex;
+}
+
+.theme-list button {
+    background: none;
+    border: none;
+    padding: 12px 20px;
+    text-align: right;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: background-color 0.25s ease;
+    color: var(--text-color);
+}
+
+.theme-list button:hover,
+.theme-list button:focus {
+    background-color: var(--primary-color);
+    color: white;
+    outline: none;
+}
+
+.color-circle {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    border: 1px solid #888;
+}
+
+.color-default {
+    background: #f0f2f5;
+}
+
+.color-dark {
+    background: #121212;
+}
+
+.color-pink {
+    background: #ff66b2;
+}
+
+.color-blueanime {
+    background: #3399ff;
+}
+
+.color-theme1 {
+    background: #ffb300;
+}
+
+.color-theme2 {
+    background: #4caf50;
+}
+
+.color-theme3 {
+    background: #2196f3;
+}
+
+.color-theme4 {
+    background: #ff5722;
+}
+
+.color-theme5 {
+    background: #673ab7;
+}
+
+.color-theme6 {
+    background: #9c27b0;
+}
+
+.color-theme7 {
+    background: #ff9800;
+}
+
+.color-theme8 {
+    background: #00bcd4;
+}
+
+.color-theme9 {
+    background: #cddc39;
+}
+
+
+/* --------- الأيقونات --------- */
+
+.social-icons {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    justify-content: center;
+}
+
+.social-icons img {
+    width: 30px;
+    height: 30px;
+    margin: 5px;
+    transition: transform 0.3s ease;
+}
+
+.social-icons img:hover {
+    transform: scale(1.2);
+}
+
+
+/* --------- تذييل الصفحة --------- */
+
+footer {
+    position: fixed;
+    bottom: 5%;
+    width: 100%;
+}
+
+
+/* --------- العناوين والنصوص --------- */
+
+h1,
+h2 {
+    margin: 0 0 10px;
+}
+
+ul {
+    padding-left: 20px;
+}

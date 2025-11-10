@@ -1,0 +1,424 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>.levels-view {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 40px;
+  direction: ltr; /* يتم تعديلها حسب اللغة */
+}
+
+.level-item {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.main-circle {
+  position: relative;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  background-color: var(--button-bg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+.main-circle:hover,
+.main-circle:focus-within {
+  background-color: var(--primary-color);
+  color: white;
+  transform: scale(1.05);
+}
+
+.circle-range {
+  width: 90px;
+  accent-color: var(--primary-color);
+}
+
+.circle-label {
+  margin-top: 6px;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.side-ranges {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.mini-range-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.mini-label {
+  font-size: 13px;
+  font-weight: 600;
+  min-width: 60px;
+  text-align: right;
+}
+
+.mini-range {
+  width: 120px;
+  accent-color: var(--primary-color);
+}</style>
+</head>
+<body>
+    <section class="levels-view" aria-label="عرض المستويات">
+  <div class="level-item">
+    <div class="main-circle">
+     
+      <span class="circle-label">القراءة</span>
+    </div>
+
+    <div class="side-ranges">
+      <div class="mini-range-group">
+        <label class="mini-label">التركيز</label>
+        <input type="range" min="0" max="100" value="70" class="mini-range">
+      </div>
+      <div class="mini-range-group">
+        <label class="mini-label">الفهم</label>
+        <input type="range" min="0" max="100" value="80" class="mini-range">
+      </div>
+      <div class="mini-range-group">
+        <label class="mini-label">السرعة</label>
+        <input type="range" min="0" max="100" value="65" class="mini-range">
+      </div>
+      <div class="mini-range-group">
+        <label class="mini-label">الدقة</label>
+        <input type="range" min="0" max="100" value="90" class="mini-range">
+      </div>
+    </div>
+  </div>
+
+  <!- تكرار نفس الكتلة لكل مهارة (كتابة، استماع، نطق) -->
+<!-- </section>
+</body>
+</html> -->
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Range Circle Update</title>
+    <style>
+        :root {
+            --primary-color: #007bff; /* يمكن تغيير هذا اللون */
+            --button-bg: #f8f9fa;
+        }
+
+        .levels-view {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            margin-top: 40px;
+            direction: rtl; /* تم تغييرها لتناسب اللغة العربية */
+            font-family: Arial, sans-serif;
+        }
+
+        .level-item {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .main-circle {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            /* تم إزالة border-radius: 50%; من هنا لنتمكن من تغييرها ديناميكيًا */
+            background-color: var(--button-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border-radius: 50%;
+            /* خصائص الحدود الدائرية الأساسية */
+            border: 10px solid #ddd; 
+            box-sizing: border-box; /* لضمان بقاء العرض والارتفاع ثابتين */
+        }
+
+        /* هذا هو الجزء الأهم لتطبيق الحدود كنسبة مئوية (Progress Ring) */
+        .circle-progress {
+            position: absolute;
+            top: -10px;
+            left: -10px;
+            width: 160px; /* 140px + 2*10px (سمك الحد) */
+            height: 160px; /* 140px + 2*10px (سمك الحد) */
+            border-radius: 50%;
+            /* Border-image: نستخدمه لإظهار التقدم كحد دائري (لا يمكن استخدامه بسهولة لتمثيل نسبة مئوية) */
+            /* بدلاً من ذلك، نستخدم خاصية `conic-gradient` في `background` لإنشاء دائرة التقدم */
+            background: conic-gradient(var(--primary-color) var(--progress, 0%), transparent var(--progress, 0%));
+            mask-image: radial-gradient(transparent 70px, black 0); /* لإظهار التقدم فقط في الحافة */
+            -webkit-mask-image: radial-gradient(transparent 70px, black 0);
+            transition: background 0.5s ease;
+            transform: rotate(-90deg); /* لبدء الدائرة من الأعلى */
+        }
+        
+        .main-circle:hover,
+        .main-circle:focus-within {
+            background-color: var(--primary-color);
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .circle-range {
+            width: 90px;
+            accent-color: var(--primary-color);
+        }
+
+        .circle-label {
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .circle-value {
+            font-size: 24px;
+            font-weight: bolder;
+            margin-bottom: 5px;
+        }
+
+        .side-ranges {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .mini-range-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .mini-label {
+            font-size: 13px;
+            font-weight: 600;
+            min-width: 60px;
+            text-align: left;
+        }
+
+        .mini-range {
+            width: 120px;
+            accent-color: var(--primary-color);
+        }
+    </style>
+    <style>
+    :root {
+        --primary-color: #007bff;
+        --button-bg: #f8f9fa;
+    }
+
+    .levels-view {
+        /* ... (CSS غير متغير) ... */
+        direction: rtl;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        gap: 40px;
+        margin-top: 40px;
+    }
+
+    .level-item {
+        /* ... (CSS غير متغير) ... */
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .main-circle {
+        position: relative;
+        width: 140px;
+        height: 140px;
+        background-color: var(--button-bg);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        transition: all 0.5s ease; /* مدة الانتقال لتغير الشكل */
+        
+        border: 10px solid #ddd;
+        box-sizing: border-box;
+        /* الخصائص الأساسية التي ستتغير */
+        border-radius: 50%;
+        clip-path: none;
+    }
+
+    /* ... (CSS لـ hover, circle-progress, side-ranges وغيرها كما هو) ... */
+
+    .circle-progress {
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        /* لضمان أن التقدم يظهر بشكل دائري دائمًا، حتى لو تغير شكل الدائرة */
+        background: conic-gradient(var(--primary-color) var(--progress, 0%), transparent var(--progress, 0%));
+        mask-image: radial-gradient(transparent 70px, black 0);
+        -webkit-mask-image: radial-gradient(transparent 70px, black 0);
+        transition: background 0.5s ease;
+        transform: rotate(-90deg);
+        /* هذا السطر مهم: لضمان أن PROGRESS RING لا يتأثر بتغيير الشكل للمثلث والمربع */
+        clip-path: circle(50% at 50% 50%); 
+    }
+</style>
+
+
+</head>
+<body>
+    <section class="levels-view" aria-label="عرض المستويات">
+        <div class="level-item">
+            <div class="main-circle" id="reading-circle">
+                <div class="circle-progress" id="circle-progress"></div>
+                <span class="circle-value" id="total-value">76%</span>
+                <span class="circle-label">القراءة</span>
+            </div>
+
+            <div class="side-ranges">
+                <div class="mini-range-group">
+                    <label class="mini-label">التركيز</label>
+                    <input type="range" min="0" max="100" value="70" class="mini-range" id="range-focus">
+                </div>
+                <div class="mini-range-group">
+                    <label class="mini-label">الفهم</label>
+                    <input type="range" min="0" max="100" value="80" class="mini-range" id="range-comprehension">
+                </div>
+                <div class="mini-range-group">
+                    <label class="mini-label">السرعة</label>
+                    <input type="range" min="0" max="100" value="65" class="mini-range" id="range-speed">
+                </div>
+                <div class="mini-range-group">
+                    <label class="mini-label">الدقة</label>
+                    <input type="range" min="0" max="100" value="90" class="mini-range" id="range-accuracy">
+                </div>
+            </div>
+        </div>
+
+        </section>
+
+    <script>
+        const ranges = [
+            document.getElementById('range-focus'),
+            document.getElementById('range-comprehension'),
+            document.getElementById('range-speed'),
+            document.getElementById('range-accuracy')
+        ];
+        
+        const circle = document.getElementById('reading-circle');
+        const circleProgress = document.getElementById('circle-progress');
+        const totalValueSpan = document.getElementById('total-value');
+
+        function updateReadingLevel() {
+            // 1. حساب متوسط القيم
+            const total = ranges.reduce((sum, range) => sum + parseInt(range.value), 0);
+            const average = Math.round(total / ranges.length);
+
+            // 2. تحديث قيمة المتوسط المعروضة
+            totalValueSpan.textContent = `${average}%`;
+
+            // 3. تحديث الحدود الدائرية (Progress Ring)
+            // استخدام متغير CSS لخاصية conic-gradient
+            circleProgress.style.setProperty('--progress', `${average}%`);
+
+            // 4. تغيير شكل الدائرة (border-radius)
+            let borderRadius = '50%'; // القيمة الافتراضية
+            
+            if (average < 25) {
+                borderRadius = '10px'; // مربع بحدود قليلة
+            } else if (average >= 25 && average < 50) {
+                borderRadius = '50% 50% 0 0'; // قوس أو ربع دائرة
+            } else if (average >= 50 && average < 75) {
+                borderRadius = '70px 70px 0 0 / 140px 140px 0 0'; // نصف دائرة علوية (شكل بيضاوي)
+            } else {
+                borderRadius = '50%'; // دائرة كاملة
+            }
+            
+            circle.style.borderRadius = borderRadius;
+        }
+
+        // إضافة مستمع حدث التغيير لكل شريط تمرير
+        ranges.forEach(range => {
+            range.addEventListener('input', updateReadingLevel);
+        });
+
+        // تشغيل الدالة عند تحميل الصفحة لإظهار القيم الافتراضية
+        updateReadingLevel();
+    </script>
+ 
+    const ranges = [
+        document.getElementById('range-focus'),
+        document.getElementById('range-comprehension'),
+        document.getElementById('range-speed'),
+        document.getElementById('range-accuracy')
+    ];
+    
+    const circle = document.getElementById('reading-circle');
+    const circleProgress = document.getElementById('circle-progress');
+    const totalValueSpan = document.getElementById('total-value');
+
+    function updateReadingLevel() {
+        const total = ranges.reduce((sum, range) => sum + parseInt(range.value), 0);
+        const average = Math.round(total / ranges.length);
+
+        totalValueSpan.textContent = `${average}%`;
+        circleProgress.style.setProperty('--progress', `${average}%`);
+        
+        // --- تهيئة الخصائص قبل تطبيق الشكل الجديد ---
+        circle.style.clipPath = 'none'; 
+        circle.style.border = '10px solid #ddd'; 
+
+        // --- منطق تغيير الشكل ---
+        let borderRadius = '50%'; 
+
+        if (average < 20) {
+            // ⭐ مثلث
+            borderRadius = '0';
+            // قطع العنصر (الشكل الداخلي) لجعله مثلثًا
+            circle.style.clipPath = 'polygon(50% 0%, 0% 100%, 100% 100%)';
+            // إزالة الحد المربع الذي قد يظهر خلف المثلث
+            circle.style.border = 'none'; 
+            
+        } else if (average >= 20 && average < 40) {
+            // ⭐ مربع
+            borderRadius = '0'; 
+            
+        } else if (average >= 40 && average < 60) {
+            // ⭐ نصف دائرة علوية
+            borderRadius = '70px 70px 0 0 / 140px 140px 0 0'; 
+            
+        } else {
+            // ⭐ دائرة كاملة
+            borderRadius = '50%';
+        }
+
+        circle.style.borderRadius = borderRadius;
+    }
+
+    ranges.forEach(range => {
+        range.addEventListener('input', updateReadingLevel);
+    });
+
+    updateReadingLevel();
+</script> -->
+</body>
+</html>   <!-- <script>

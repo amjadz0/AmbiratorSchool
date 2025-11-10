@@ -1,0 +1,237 @@
+/* 📁 الاشتراك.css */
+
+body {
+    margin: 0;
+    font-family: 'Cairo', sans-serif;
+    text-align: center;
+    transition: background-color 0.4s, color 0.4s;
+    background-color: var(--bg-color);
+    /* استخدام متغير CSS */
+    color: var(--text-color);
+    /* استخدام متغير CSS */
+}
+
+header.main-header {
+    padding: 1rem;
+    background-color: var(--primary-color);
+    /* استخدام متغير CSS */
+    color: var(--text-color);
+    /* استخدام متغير CSS */
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+select {
+    padding: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--button-bg);
+    /* استخدام متغير CSS */
+    color: var(--text-color);
+    /* استخدام متغير CSS */
+    font-weight: bold;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    padding: 40px 10px;
+}
+
+.subscription-box {
+    width: 90%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 20px;
+    background-color: var(--sidebar-bg);
+    /* استخدام متغير CSS */
+    color: var(--text-color);
+    /* استخدام متغير CSS */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: 0.4s ease-in-out;
+    position: relative;
+}
+
+.subscription-box:hover {
+    transform: scale(1.03);
+}
+
+.payment-methods {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.subscription-box.active .payment-methods {
+    display: flex;
+}
+
+.payment-methods button {
+    padding: 10px;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    background-color: var(--primary-color);
+    /* استخدام متغير CSS */
+    color: var(--text-color);
+    /* استخدام متغير CSS */
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.payment-methods button:hover {
+    background-color: var(--button-hover-bg, #0056b3);
+    /* متغير جديد للـ hover أو قيمة افتراضية */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* ------------- الثيمات الجديدة (13 ثيم) ------------- */
+
+:root {
+    --bg-color: #f0f2f5;
+    --text-color: #222;
+    --primary-color: #007bff;
+    --button-bg: #e0e0e0;
+    --sidebar-bg: #fff;
+    --button-hover-bg: #0056b3;
+    /* لون جديد عند التحويم */
+}
+
+body.default {
+    --bg-color: #f0f2f5;
+    --text-color: #222;
+    --primary-color: #007bff;
+    --button-bg: #e0e0e0;
+    --sidebar-bg: #fff;
+    --button-hover-bg: #0056b3;
+}
+
+body.dark {
+    --bg-color: #121212;
+    --text-color: #eee;
+    --primary-color: #3399ff;
+    --button-bg: #333;
+    --sidebar-bg: #1f1f1f;
+    --button-hover-bg: #0066cc;
+}
+
+body.pink {
+    --bg-color: #ffe6f0;
+    --text-color: #660033;
+    --primary-color: #ff66b2;
+    --button-bg: #ffb3d9;
+    --sidebar-bg: #ffd6e8;
+    --button-hover-bg: #cc3388;
+}
+
+body.blueanime {
+    --bg-color: #e0f0ff;
+    --text-color: #003366;
+    --primary-color: #3399ff;
+    --button-bg: #99ccff;
+    --sidebar-bg: #cce6ff;
+    --button-hover-bg: #0066cc;
+}
+
+body.theme1 {
+    --bg-color: #fff8e1;
+    --text-color: #5d4037;
+    --primary-color: #ffb300;
+    --button-bg: #ffecb3;
+    --sidebar-bg: #fff3e0;
+    --button-hover-bg: #cc8800;
+}
+
+body.theme2 {
+    --bg-color: #e8f5e9;
+    --text-color: #1b5e20;
+    --primary-color: #4caf50;
+    --button-bg: #c8e6c9;
+    --sidebar-bg: #dcedc8;
+    --button-hover-bg: #388e3c;
+}
+
+body.theme3 {
+    --bg-color: #e3f2fd;
+    --text-color: #0d47a1;
+    --primary-color: #2196f3;
+    --button-bg: #bbdefb;
+    --sidebar-bg: #bbdefb;
+    --button-hover-bg: #1976d2;
+}
+
+body.theme4 {
+    --bg-color: #fbe9e7;
+    --text-color: #bf360c;
+    --primary-color: #ff5722;
+    --button-bg: #ffccbc;
+    --sidebar-bg: #ffccbc;
+    --button-hover-bg: #e64a19;
+}
+
+body.theme5 {
+    --bg-color: #ede7f6;
+    --text-color: #311b92;
+    --primary-color: #673ab7;
+    --button-bg: #d1c4e9;
+    --sidebar-bg: #d1c4e9;
+    --button-hover-bg: #512da8;
+}
+
+body.theme6 {
+    --bg-color: #f3e5f5;
+    --text-color: #4a148c;
+    --primary-color: #9c27b0;
+    --button-bg: #e1bee7;
+    --sidebar-bg: #e1bee7;
+    --button-hover-bg: #7b1fa2;
+}
+
+body.theme7 {
+    --bg-color: #fff3e0;
+    --text-color: #e65100;
+    --primary-color: #ff9800;
+    --button-bg: #ffe0b2;
+    --sidebar-bg: #ffe0b2;
+    --button-hover-bg: #f57c00;
+}
+
+body.theme8 {
+    --bg-color: #e0f7fa;
+    --text-color: #006064;
+    --primary-color: #00bcd4;
+    --button-bg: #b2ebf2;
+    --sidebar-bg: #b2ebf2;
+    --button-hover-bg: #0097a7;
+}
+
+body.theme9 {
+    --bg-color: #f9fbe7;
+    --text-color: #827717;
+    --primary-color: #cddc39;
+    --button-bg: #f0f4c3;
+    --sidebar-bg: #f0f4c3;
+    --button-hover-bg: #afb42b;
+}
+
+.fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+}

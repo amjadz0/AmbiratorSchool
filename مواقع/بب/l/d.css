@@ -1,0 +1,123 @@
+/* ============================================
+   تنسيقات Mobile-Only — تطبق فقط على الشاشات < 600px
+   ============================================ */
+
+@media (max-width: 600px) {
+    /* جعل زر التبديل مرئياً */
+    .mobile-menu-toggle {
+        display: block;
+    }
+
+    /* إخفاء القائمة افتراضياً */
+    .modes-wrapper {
+        display: none;
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.9);
+        z-index: 999;
+        padding: 80px 20px 40px;
+        overflow-y: auto;
+    }
+
+    .modes-wrapper.show-mobile {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    /* أزرار أكبر للمس */
+    .mode-btn {
+        min-height: 60px;
+        padding: 16px;
+        border-radius: 16px;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* تعديل الأيقونات */
+    .mode-icon-wrapper {
+        width: 48px;
+        height: 48px;
+    }
+
+    /* تحسين النصوص */
+    .mode-label {
+        font-size: 1rem;
+    }
+
+    .mode-desc {
+        font-size: 0.75rem;
+        white-space: normal;
+        max-width: none;
+    }
+
+    /* سرعة التحويم للمس */
+    .mode-btn:hover {
+        transform: none;
+    }
+
+    .mode-btn:active {
+        transform: scale(0.97);
+    }
+
+    /* منطقة المعاينة ثابتة في الأسفل */
+    .preview-box {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        margin: 0;
+        border-radius: 24px 24px 0 0;
+        padding: 20px;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(15px);
+        z-index: 100;
+    }
+
+    .preview-content {
+        flex-direction: row;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .preview-visual {
+        width: 40px;
+        height: 40px;
+    }
+
+    .preview-title {
+        font-size: 0.9rem;
+    }
+
+    .preview-desc {
+        font-size: 0.7rem;
+    }
+}
+
+/* ============================================
+   تحسينات Tablet (600px - 1024px)
+   ============================================ */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .modes-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .mode-btn {
+        flex-direction: column;
+        text-align: center;
+        height: auto;
+        padding: 20px;
+    }
+
+    .mode-info {
+        align-items: center;
+        margin-top: 12px;
+    }
+
+    .mode-desc {
+        text-align: center;
+        white-space: normal;
+    }
+}

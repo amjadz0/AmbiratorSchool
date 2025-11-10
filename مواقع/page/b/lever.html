@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">نظام المستويات التفاعلي المتقدم</title>
+    
+    <!-- ربط ملف CSS الرئيسي -->
+    <link rel="stylesheet" href="../../css/style.css">
+    
+    <!-- تحميل Chart.js -->
+    <script src="../../Js/lib/char.js"></script>
+    <link rel="stylesheet" href="../../css/b/lever.css">
+    
+</head>
+
+<body class="default">
+
+    <!-- الشريط الجانبي -->
+    <nav class="sidebar" aria-label="الأزرار الجانبية">
+        <h1 style="text-align: center; margin: 0 0 20px 0; color: var(--primary-color);">مدرسة الإمبراطور</h1>
+        <button data-key="level"  style="background-color:var(--primary-color) ;">المستوى</button>
+        <button data-key="competitions" onclick="location='./competitions.html'">المسابقات</button>
+        <button data-key="assignments" onclick="location='./assignments.html'">الواجبات</button>
+        <button data-key="tests" onclick="location='./tests.html'">الاختبارات</button>
+        <button data-key="library" onclick="location='./library.html'">المكتبة</button>
+        <button data-key="teacher" onclick="location='./teacher.html'">الأستاذ</button>
+        <button data-key="university" onclick="location='./university.html'">الجامعة</button>
+        <button data-key="contact" onclick="location='./contact.html'">تواصل بنا</button>
+    </nav>
+
+    <!-- المحتوى الرئيسي -->
+    <main class="content" role="main" tabindex="0">
+        
+        <div class="container">
+            <!-- عناوين الصفحة -->
+            <h1 class="section-title" data-key="levelAnalytics">نظام التحليل التفاعلي المتقدم</h1>
+            
+            <!-- قوائم الثيم واللغة -->
+            <div class="header-controls">
+                <div class="theme-select" tabindex="0">
+                    <button id="themeBtn" aria-haspopup="listbox" aria-expanded="false" aria-controls="themeList" data-key="theme">🎨 الثيم</button>
+                    <div id="themeList" class="theme-list" role="listbox" tabindex="-1" aria-labelledby="themeBtn">
+                        <button data-theme="default" role="option" tabindex="0"><span class="color-circle color-default"></span> افتراضي</button>
+                        <button data-theme="dark" role="option" tabindex="0"><span class="color-circle color-dark"></span> داكن</button>
+                        <button data-theme="pink" role="option" tabindex="0"><span class="color-circle color-pink"></span> وردي</button>
+                        <button data-theme="blueanime" role="option" tabindex="0"><span class="color-circle color-blueanime"></span> أزرق أنمي</button>
+                        <button data-theme="theme1" role="option" tabindex="0"><span class="color-circle color-theme1"></span> ثيم 1</button>
+                        <button data-theme="theme2" role="option" tabindex="0"><span class="color-circle color-theme2"></span> ثيم 2</button>
+                        <button data-theme="theme3" role="option" tabindex="0"><span class="color-circle color-theme3"></span> ثيم 3</button>
+                        <button data-theme="theme4" role="option" tabindex="0"><span class="color-circle color-theme4"></span> ثيم 4</button>
+                        <button data-theme="theme5" role="option" tabindex="0"><span class="color-circle color-theme5"></span> ثيم 5</button>
+                        <button data-theme="theme6" role="option" tabindex="0"><span class="color-circle color-theme6"></span> ثيم 6</button>
+                        <button data-theme="theme7" role="option" tabindex="0"><span class="color-circle color-theme7"></span> ثيم 7</button>
+                        <button data-theme="theme8" role="option" tabindex="0"><span class="color-circle color-theme8"></span> ثيم 8</button>
+                        <button data-theme="theme9" role="option" tabindex="0"><span class="color-circle color-theme9"></span> ثيم 9</button>
+                    </div>
+                </div>
+
+                <div class="language-select" tabindex="0">
+                    <button id="languageBtn" aria-haspopup="listbox" aria-expanded="false" aria-controls="languageList" data-key="language">🌐 اللغة</button>
+                    <div id="languageList" class="language-list" role="listbox" tabindex="-1" aria-labelledby="languageBtn">
+                        <button data-lang="ar" role="option" tabindex="0">العربية</button>
+                        <button data-lang="en" role="option" tabindex="0">English</button>
+                        <button data-lang="jp" role="option" tabindex="0">日本語</button>
+                        <button data-lang="kr" role="option" tabindex="0">한국어</button>
+                        <button data-lang="cn" role="option" tabindex="0">中文</button>
+                        <button data-lang="es" role="option" tabindex="0">Español</button>
+                        <button data-lang="fr" role="option" tabindex="0">Français</button>
+                        <button data-lang="it" role="option" tabindex="0">Italiano</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- لوحة الإشعارات -->
+            <div class="notification-panel" id="notificationPanel">
+                <div class="notification-title">
+                    <span data-key="notificationTitle">🎯 تذكير بالأهداف</span>
+                </div>
+                <div class="notification-content" id="notificationContent">
+                    <!-- سيتم ملء المحتوى ديناميكيًا -->
+                </div>
+            </div>
+            
+            <!-- لوحة الأهداف -->
+            <div class="goals-panel">
+                <h3 data-key="goalsTitle">🎯 أهداف المهارات</h3>
+                <div class="goals-grid" id="goalsGrid">
+                    <!-- سيتم ملء الأهداف ديناميكيًا -->
+                </div>
+            </div>
+            
+            <!-- أزرار التحليل الثابتة -->
+            <div class="analysis-controls">
+                <button class="analysis-btn active" data-analysis="overview" data-key="overview">📊 نظرة عامة</button>
+                <button class="analysis-btn" data-analysis="comparison" data-key="comparison">📈 مقارنة المهارات</button>
+                <button class="analysis-btn" data-analysis="progress" data-key="progress">🕒 التقدم الزمني</button>
+                <button class="analysis-btn" data-analysis="distribution" data-key="distribution">🎯 توزيع المستويات</button>
+                <button class="analysis-btn" data-analysis="performance" data-key="performance">⭐ أداء التفاصيل</button>
+                <button class="analysis-btn" data-analysis="ranking" data-key="ranking">🏆 ترتيب المهارات</button>
+                <button class="analysis-btn" data-analysis="goals" data-key="goalsChart">🎯 الأهداف والإنجازات</button>
+                <button class="analysis-btn" data-analysis="global" data-key="global">🌍 مقارنة عالمية</button>
+                <button class="analysis-btn" data-analysis="advanced" data-key="advanced">📊 تحليلات متقدمة</button>
+            </div>
+
+            <div class="main-content">
+                <!-- قسم الدوائر التفاعلية -->
+                <div class="levels-view">
+                    <!-- القراءة -->
+                    <div class="level-item">
+                        <div class="circle-container">
+                            <div class="circle-progress" id="reading-progress"></div>
+                            <div class="main-circle" id="reading-circle">
+                                <div class="circle-content">
+                                    <div class="circle-value" id="reading-value">76%</div>
+                                    <span class="circle-label" data-key="reading">القراءة</span>
+                                </div>
+                            </div>
+                            <div class="level-indicator" id="reading-indicator" data-key="levelGood">مستوى جيد</div>
+                        </div>
+
+                        <div class="side-ranges">
+                            <div class="mini-range-group">
+                                <label class="mini-label" data-key="focus">التركيز</label>
+                                <input type="range" min="0" max="100" value="70" class="mini-range" data-skill="focus" data-category="reading">
+                                <span class="range-value">70%</span>
+                            </div>
+                            <div class="mini-range-group">
+                                <label class="mini-label" data-key="comprehension">الفهم</label>
+                                <input type="range" min="0" max="100" value="80" class="mini-range" data-skill="comprehension" data-category="reading">
+                                <span class="range-value">80%</span>
+                            </div>
+                            <div class="mini-range-group">
+                                <label class="mini-label" data-key="speed">السرعة</label>
+                                <input type="range" min="0" max="100" value="65" class="mini-range" data-skill="speed" data-category="reading">
+                                <span class="range-value">65%</span>
+                            </div>
+                            <div class="mini-range-group">
+                                <label class="mini-label" data-key="accuracy">الدقة</label>
+                                <input type="range" min="0" max="100" value="90" class="mini-range" data-skill="accuracy" data-category="reading">
+                                <span class="range-value">90%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- الكتابة -->
+                    <div class="level-item">
+                        <div class="circle-container">
+                            <div class="circle-progress" id="writing-progress"></div>
+                            <div class="main-circle" id="writing-circle">
+                                <div class="circle-content">
+                                    <div class="circle-value" id="writing-value">60%</div>
+                                    <span class="circle-label" data-key="writing">الكتابة</span>
+                                </div>
+                            </div>
+                            <div class="level-indicator" id="writing-indicator" data-key="levelMedium">مستوى متوسط</div>
+                        </div>
+
+                        <div class="side-ranges">
+                            <div class="mini-range-group">
+                                <label class="mini-label" data-key="organization">التنظيم</label>
+                                <input type="range" min="0" max="100" value="70" class="mini-range" data-skill="organization" data-category="writing">
+                                <span class="range-value">70%</span>
+                            </div>
+                            <div class="mini-range-group">
+                                <label class="mini-label" data-key="grammar">القواعد</label>
+                                <input type="range" min="0" max="100" value="50" class="mini-range" data-skill="grammar" data-category="writing">
+                                <span class="range-value">50%</span>
+                            </div>
+                            <div class="mini-range-group">
+                                <label class="mini-label" data-key="creativity">الإبداع</label>
+                                <input type="range" min="0" max="100" value="65" class="mini-range" data-skill="creativity" data-category="writing">
+                                <span class="range-value">65%</span>
+                            </div>
+                            <div class="mini-range-group">
+                                <label class="mini-label" data-key="clarity">الوضوح</label>
+                                <input type="range" min="0" max="100" value="55" class="mini-range" data-skill="clarity" data-category="writing">
+                                <span class="range-value">55%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- الاستماع -->
+                    <div class="level-item">
+                        <div class="circle-container">
+                            <div class="circle-progress" id="listening-progress"></div>
+                            <div class="main-circle" id="listening-circle">
+                                <div class="circle-content">
+                                    <div class="circle-value" id="listening-value">85%</div>
+                                    <span class="circle-label" data-key="listening">الاستماع</span>
+                                </div>
+                            </div>
+                            <div class="level-indicator" id="listening-indicator" data-key="levelExcellent">مستوى ممتاز</div>
+                        </div>
+
+                        <div class="side-ranges">
+                            <div class="mini-range-group">
+                                <label class="mini-label" data-key="listeningFocus">التركيز</label>
+                                <input type="range" min="0" max="100" value="80" class="mini-range" data-skill="listening-focus" data-category="listening">
+                                <span class="range-value">80%</span>
+                            </div>
+                            <div class="mini-range-group">
+                                <label class="mini-label" data-key="listeningComprehension">الفهم</label>
+                                <input type="range" min="0" max="100" value="85" class="mini-range" data-skill="listening-comprehension" data-category="listening">
+                                <span class="range-value">85%</span>
+                            </div>
+                            <div class="mini-range-group">
+                                <label class="mini-label" data-key="absorption">الاستيعاب</label>
+                                <input type="range" min="0" max="100" value="90" class="mini-range" data-skill="absorption" data-category="listening">
+                                <span class="range-value">90%</span>
+                            </div>
+                            <div class="mini-range-group">
+                                <label class="mini-label" data-key="analysis">التحليل</label>
+                                <input type="range" min="0" max="100" value="85" class="mini-range" data-skill="analysis" data-category="listening">
+                                <span class="range-value">85%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- المحادثة -->
+                    <div class="level-item">
+                        <div class="circle-container">
+                            <div class="circle-progress" id="speaking-progress"></div>
+                            <div class="main-circle" id="speaking-circle">
+                                <div class="circle-content">
+                                    <div class="circle-value" id="speaking-value">45%</div>
+                                    <span class="circle-label" data-key="speaking">المحادثة</span>
+                                </div>
+                            </div>
+                            <div class="level-indicator" id="speaking-indicator" data-key="levelMedium">مستوى متوسط</div>
+                        </div>
+
+                        <div class="side-ranges">
+                            <div class="mini-range-group">
+                                <label class="mini-label" data-key="fluency">الطلاقة</label>
+                                <input type="range" min="0" max="100" value="50" class="mini-range" data-skill="fluency" data-category="speaking">
+                                <span class="range-value">50%</span>
+                            </div>
+                            <div class="mini-range-group">
+                                <label class="mini-label" data-key="pronunciation">النطق</label>
+                                <input type="range" min="0" max="100" value="40" class="mini-range" data-skill="pronunciation" data-category="speaking">
+                                <span class="range-value">40%</span>
+                            </div>
+                            <div class="mini-range-group">
+                                <label class="mini-label" data-key="confidence">الثقة</label>
+                                <input type="range" min="0" max="100" value="55" class="mini-range" data-skill="confidence" data-category="speaking">
+                                <span class="range-value">55%</span>
+                            </div>
+                            <div class="mini-range-group">
+                                <label class="mini-label" data-key="interaction">التفاعل</label>
+                                <input type="range" min="0" max="100" value="35" class="mini-range" data-skill="interaction" data-category="speaking">
+                                <span class="range-value">35%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- قسم الرسوم البيانية -->
+                <div class="charts-section">
+                    <div class="chart-title" id="chart-title" data-key="chartOverview">نظرة عامة على المهارات</div>
+                    <div class="chart-container">
+                        <canvas id="analysisChart"></canvas>
+                    </div>
+                    
+                    <!-- التكامل مع الأنظمة الخارجية -->
+                    <div class="external-integration">
+                        <button class="integration-btn" id="saveDataBtn" data-key="saveData">
+                            💾 حفظ البيانات
+                        </button>
+                        <button class="integration-btn" id="exportPdfBtn" data-key="exportPdf">
+                            📄 تصدير PDF
+                        </button>
+                        <button class="integration-btn" id="shareResultsBtn" data-key="shareResults">
+                            🔗 مشاركة النتائج
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- لوحة التحليلات المتقدمة -->
+            <div class="advanced-analytics-panel" id="advancedAnalyticsPanel" style="display: none;">
+                <h3 data-key="advancedAnalytics">📊 التحليلات المتقدمة</h3>
+                <div class="analytics-grid" id="analyticsGrid">
+                    <!-- سيتم ملء التحليلات ديناميكيًا -->
+                </div>
+            </div>
+
+            <!-- دليل الألوان المحسن -->
+            <div class="color-legend">
+                <div class="color-item">
+                    <div class="color-box" style="background-color: var(--color-0-20);"></div>
+                    <span data-key="levelRange1">0-20% (مبتدئ)</span>
+                </div>
+                <div class="color-item">
+                    <div class="color-box" style="background-color: var(--color-20-40);"></div>
+                    <span data-key="levelRange2">20-40% (تحت المتوسط)</span>
+                </div>
+                <div class="color-item">
+                    <div class="color-box" style="background-color: var(--color-40-60);"></div>
+                    <span data-key="levelRange3">40-60% (متوسط)</span>
+                </div>
+                <div class="color-item">
+                    <div class="color-box" style="background-color: var(--color-60-80);"></div>
+                    <span data-key="levelRange4">60-80% (جيد)</span>
+                </div>
+                <div class="color-item">
+                    <div class="color-box" style="background-color: var(--color-80-95);"></div>
+                    <span data-key="levelRange5">80-95% (ممتاز)</span>
+                </div>
+                <div class="color-item">
+                    <div class="color-box" style="background-color: var(--color-95-100);"></div>
+                    <span data-key="levelRange6">95-100% (متميز)</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- الشريط السفلي -->
+    <footer class="bottom-buttons" aria-label="شريط الأزرار السفلي">
+        <button data-key="settings" onclick="location='./settings.html'" aria-label="الإعدادات">⚙️ الإعدادات</button>
+        <button data-key="news" onclick="location='./news.html'" aria-label="الأخبار">📰 الأخبار</button>
+        <button data-key="home" onclick="location='../../index.html'" aria-label="الرئيسية">🏠 الرئيسية</button>
+        <button data-key="account" onclick="location='./account.html'" aria-label="الحساب">👤 الحساب</button>
+        <button data-key="class" onclick="location='./class.html'" aria-label="الفصل">👥 الفصل</button>
+    </footer>
+
+    <script src="../../Js/script.js">
+
+    </script><script src="../../Js/b/lever.js"></script>
+    
+</body>
+</html>

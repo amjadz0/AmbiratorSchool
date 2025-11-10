@@ -1,0 +1,42 @@
+#aside_intxe {
+    width: 20vw;
+    background-color: rgb(247, 195, 6);
+    color: brown;
+
+}
+
+#aside_intxe button{
+    border-style:groove ;
+    border-width: 3px;
+    border-color: rgb(244, 102, 0);
+    width: 10%;
+    padding: 8px;
+    border-bottom-right-radius: 50%;
+    border-top-right-radius: 50%;
+    box-shadow: 1px 1px 40px  rgb(255, 191, 0);
+    transition: 1s;
+    display: block;
+    margin-top: 10px;
+margin-right: 10px;
+margin-left: -100px;  
+text-align: end;
+width: 20vw;
+background-color: rgb(244, 102, 0);
+color: rgb(178, 14, 14);
+
+}#aside_intxe button:hover {
+
+    box-shadow: 1px 1px 40px  rgb(255, 0, 0);
+
+
+
+}#aside_intxe button:hover{
+    width: 210px;
+}
+#aside_intxe button:hover {
+
+    box-shadow: 1px 1px 40px  rgb(255, 191, 0);
+
+
+
+}

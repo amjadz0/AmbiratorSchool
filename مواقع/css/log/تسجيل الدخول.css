@@ -1,0 +1,149 @@
+body {
+    margin-top: 50x;
+    background-color: rgba(141, 245, 161, 0.944);
+}
+
+main {
+    text-align: center;
+}
+
+.amjad {
+    background-color: aqua;
+    width: 50%;
+    height: 50%;
+}
+
+button {
+    border: none;
+    background-color: #30dda0;
+    margin: 30px 5px 0px 5px;
+    font-weight: bold;
+    border-radius: 30px;
+    width: 100px;
+    cursor: pointer;
+}
+
+.bu {
+    width: 150px;
+}
+
+button:hover {
+    opacity: 70%;
+}
+
+input {
+    border: none;
+    margin: 15px 10px;
+    background-color: rgb(0, 0, 0, 50%);
+    border-radius: 20px;
+    text-align: center;
+    color: azure;
+    height: 3vh;
+    transition: 500ms;
+    outline: none;
+}
+
+input::placeholder {
+    color: rgb(58, 37, 125);
+    font-size: medium;
+    font-weight: bold;
+}
+
+label {
+    font-weight: bold;
+}
+
+input:focus {
+    border: 2px yellow solid;
+    background-color: transparent;
+    color: black;
+}
+
+.true:invalid {
+    border-color: orangered;
+}
+
+.true:valid {
+    border-color: chartreuse;
+}
+
+
+/* --------- ذكر داكن --------- */
+
+.theme-dark-male {
+    background-color: #002b36;
+    color: #00aaff;
+}
+
+
+/* --------- انثى داكن --------- */
+
+.theme-dark-female {
+    background-color: #1a0a1f;
+    color: #ff99cc;
+}
+
+
+/* --------- ذكر فاتح --------- */
+
+.theme-light-male {
+    background-color: #a1e1ff;
+    color: #007acc;
+}
+
+
+/* --------- انثى فاتح --------- */
+
+.theme-light-female {
+    background-color: #ffd6f9;
+    color: #660033;
+}
+
+.p {
+    background-color: red;
+}
+
+.bu {
+    width: 150px;
+    margin: 50px;
+    background-color: antiquewhite;
+}
+
+
+/* --------- أنيميشن --------- */
+
+.fade-in {
+    animation: fadeIn 0.6s ease-in-out;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+header.main-header {
+    padding: 1rem;
+    text-align: center;
+    background-color: #007bff90;
+    margin: 0;
+    padding: 10px;
+    opacity: 80%;
+    color: #eee;
+}
+
+select {
+    margin: 0 0.5rem;
+    padding: 0.5rem;
+    border-radius: 10px;
+    border: none;
+    background-color: rgb(80, 105, 140);
+    color: inherit;
+    opacity: 80%;
+    color: #fff;
+}

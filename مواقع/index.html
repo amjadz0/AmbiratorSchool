@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>مدرسة الإمبراطور - تصميم محدث</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+
+    </style>
+</head>
+
+<body class="default">
+
+    <nav class="sidebar" aria-label="الأزرار الجانبية">
+        <h1>مدرسةالامبراطور</h1>
+        <button data-key="level" onclick="location='./page/b/lever.html'">المستوى</button>
+        <button data-key="competitions">المسابقات</button>
+        <button data-key="assignments">الواجبات</button>
+        <button data-key="tests">الاختبارات</button>
+        <button data-key="library">المكتبة</button>
+        <button data-key="teacher">الأستاذ</button>
+        <button data-key="university">الجامعة</button>
+        <button data-key="contact">تواصل بنا</button>
+    </nav>
+
+    <main class="content" role="main" tabindex="0">
+
+        <header class="top-bar" aria-label="أزرار فوق البحث">
+            <div class="top-buttons" role="group" aria-label="أزرار الجدول والتحميل والبحث">
+                <button data-key="schedule" class="ss">الجدول</button>
+                <button data-key="download" class="ss">التحميل</button>
+                <button data-key="" class="ss">البحث</button>
+              
+
+                <div class="amjad">
+                    <div class="theme-select" tabindex="0">
+                        <button id="themeBtn" aria-haspopup="listbox" aria-expanded="false" aria-controls="themeList" aria-label="اختيار الثيم">اختر الثيم 🎨</button>
+                        <div id="themeList" class="theme-list" role="listbox" tabindex="-1" aria-labelledby="themeBtn">
+                            <button data-theme="default" role="option" tabindex="0"><span class="color-circle color-default"></span> افتراضي</button>
+                            <button data-theme="dark" role="option" tabindex="0"><span class="color-circle color-dark"></span> داكن</button>
+                            <button data-theme="pink" role="option" tabindex="0"><span class="color-circle color-pink"></span> وردي</button>
+                            <button data-theme="blueanime" role="option" tabindex="0"><span class="color-circle color-blueanime"></span> أزرق أنمي</button>
+                            <button data-theme="theme1" role="option" tabindex="0"><span class="color-circle color-theme1"></span> ثيم 1</button>
+                            <button data-theme="theme2" role="option" tabindex="0"><span class="color-circle color-theme2"></span> ثيم 2</button>
+                            <button data-theme="theme3" role="option" tabindex="0"><span class="color-circle color-theme3"></span> ثيم 3</button>
+                            <button data-theme="theme4" role="option" tabindex="0"><span class="color-circle color-theme4"></span> ثيم 4</button>
+                            <button data-theme="theme5" role="option" tabindex="0"><span class="color-circle color-theme5"></span> ثيم 5</button>
+                            <button data-theme="theme6" role="option" tabindex="0"><span class="color-circle color-theme6"></span> ثيم 6</button>
+                            <button data-theme="theme7" role="option" tabindex="0"><span class="color-circle color-theme7"></span> ثيم 7</button>
+                            <button data-theme="theme8" role="option" tabindex="0"><span class="color-circle color-theme8"></span> ثيم 8</button>
+                            <button data-theme="theme9" role="option" tabindex="0"><span class="color-circle color-theme9"></span> ثيم 9</button>
+                        </div>
+                    </div>
+
+                    <!-- اختيار اللغة -->
+                    <div class="language-select" tabindex="0">
+                        <button id="languageBtn" aria-haspopup="listbox" aria-expanded="false" aria-controls="languageList" aria-label="اختيار اللغة">اختر اللغة 🌐</button>
+                        <div id="languageList" class="language-list" role="listbox" tabindex="-1" aria-labelledby="languageBtn">
+                            <button data-lang="ar" role="option" tabindex="0">العربية</button>
+                            <button data-lang="en" role="option" tabindex="0">English</button>
+                            <button data-lang="jp" role="option" tabindex="0">日本語</button>
+                            <button data-lang="kr" role="option" tabindex="0">한국어</button>
+                            <button data-lang="cn" role="option" tabindex="0">中文</button>
+                            <button data-lang="es" role="option" tabindex="0">Español</button>
+                            <button data-lang="fr" role="option" tabindex="0">Français</button>
+                            <button data-lang="it" role="option" tabindex="0">Italiano</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="doors-grid" aria-label="أبواب الموقع">
+            <div class="door" tabindex="0" data-key="door1">الباب 1</div>
+            <div class="door" tabindex="0" data-key="door2">الباب 2</div>
+            <div class="door" tabindex="0" data-key="door3">الباب 3</div>
+            <div class="door" tabindex="0" data-key="door4">الباب 4</div>
+            <div class="door" tabindex="0" data-key="door5">الباب 5</div>
+            <div class="door" tabindex="0" data-key="door6">الباب 6</div>
+            <div class="door" tabindex="0" data-key="door7">الباب 7</div>
+            <div class="door" tabindex="0" data-key="door8">الباب 8</div>
+        </section>
+    </main>
+
+    <footer class="bottom-buttons" aria-label="شريط الأزرار السفلي">
+
+
+
+        <!-- أزرار إضافية في الأسفل -->
+        <button data-key="settings" aria-label="الإعدادات">⚙️ الإعدادات</button>
+        <button data-key="news" aria-label="الأخبار">📰 الأخبار</button>
+        <button data-key="home" aria-label="الرئيسية">🏠 الرئيسية</button>
+        <button data-key="account" aria-label="الحساب">👤 الحساب</button>
+        <button data-key="class" aria-label="الفصل">👤 الفصل</button>
+
+    </footer>
+
+    <script src="js/script.js">
+    </script>
+
+</body>
+
+</html>

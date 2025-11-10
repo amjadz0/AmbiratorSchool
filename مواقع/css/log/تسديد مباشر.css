@@ -1,0 +1,163 @@
+/* 🌍 القاعدة العامة */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Cairo', sans-serif;
+  direction: rtl;
+  transition: all 0.4s ease-in-out;
+}
+
+/* 🎨 أزرار اللغة والثيم */
+.top-controls {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+  display: flex;
+  gap: 10px;
+}
+.top-controls button {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 10px;
+  background: #00ffff;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+.top-controls button:hover {
+  background-color: #00d1d1;
+}
+
+/* 📋 القوائم */
+.menu {
+  position: fixed;
+  top: 50px;
+  left: 10px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.3);
+  padding: 10px;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.menu button {
+  background: none;
+  border: none;
+  text-align: right;
+  cursor: pointer;
+  font-weight: bold;
+}
+.hidden {
+  display: none;
+}
+
+/* 🧩 الحاوية */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  height: 100vh;
+  padding: 20px;
+  flex-wrap: wrap;
+}
+
+/* 💳 الكرت */
+.card-display img {
+  width: 300px;
+  border-radius: 20px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+/* 📄 النموذج */
+form {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  border-radius: 20px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 15px rgba(0,0,0,0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 300px;
+}
+
+form h2 {
+  margin: 0;
+  font-size: 22px;
+}
+
+input[type="text"] {
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #000;
+  font-size: 16px;
+  outline: none;
+  transition: 0.3s ease;
+}
+
+button {
+  padding: 12px;
+  border: none;
+  border-radius: 10px;
+  background-color: #00ffff;
+  color: #000;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+button:hover {
+  background-color: #00d1d1;
+}
+
+#message {
+  font-weight: bold;
+  text-align: center;
+}
+
+/* 📱 الهاتف */
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+  }
+}
+
+/* 🎨 الثيمات */
+body.dark-boy {
+  background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+  color: #fff;
+}
+body.dark-girl {
+  background: linear-gradient(to right, #2c3e50, #fd746c);
+  color: #fff;
+}
+body.light-boy {
+  background: linear-gradient(to right, #a1c4fd, #c2e9fb);
+  color: #000;
+}
+body.light-girl {
+  background: linear-gradient(to right, #fbc2eb, #a6c1ee);
+  color: #000;
+}
+body.light {
+  background: #ffffff;
+  color: #000;
+}
+body.dark {
+  background: #111;
+  color: #fff;
+}
+body.pink {
+  background: linear-gradient(to right, #ff9a9e, #fad0c4);
+  color: #000;
+}
+body.anime {
+  background: linear-gradient(to right, #8e2de2, #4a00e0);
+  color: #fff;
+}

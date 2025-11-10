@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>الإمبراطور — اختيار مستوى الصعوبة</title>
+    <style>
+        :root {
+            --btn-height: clamp(90px, 16vw, 120px);
+            --btn-min-width: min(320px, 100%);
+            --btn-padding: clamp(20px, 4vw, 30px) clamp(30px, 6vw, 40px);
+            --icon-size: clamp(80px, 12vw, 100px);
+            --border-radius: clamp(20px, 3vw, 28px);
+            --transition-speed: 0.3s;
+            --light-start: #00ff9d;
+            --light-end: #00d4ff;
+            --medium-start: #ffd387;
+            --medium-end: #ff9800;
+            --heavy-start: #ff4d94;
+            --heavy-end: #ff006e;
+            --pro-start: #ff00cc;
+            --pro-end: #00ccff;
+            --glass-bg: rgba(255, 255, 255, 0.12);
+            --glass-border: rgba(255, 255, 255, 0.18);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+            --shadow-soft: 0 12px 30px rgba(0, 0, 0, 0.12);
+            --shadow-hover: 0 25px 50px rgba(0, 0, 0, 0.25);
+            --shadow-selected: 0 0 0 3px currentColor;
+            --text-primary: #ffffff;
+            --text-secondary: rgba(255, 255, 255, 0.92);
+            --font-size-base: clamp(16px, 3vw, 20px);
+        }
+
+        @media (prefers-color-scheme: light) {
+            body {
+                background: linear-gradient(135deg, #f5f7fa, #e4e7f4);
+            }
+
+            :root {
+                --text-primary: #1e3c72;
+                --text-secondary: rgba(30, 60, 114, 0.85);
+                --glass-bg: rgba(255, 255, 255, 0.75);
+                --glass-border: rgba(0, 0, 0, 0.08);
+            }
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            min-height: 100vh;
+            font-family: 'Segoe UI', 'Noto Naskh Arabic', Tahoma, sans-serif;
+            font-size: var(--font-size-base);
+            padding: clamp(16px, 4vw, 32px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+        }
+
+        .difficulty-container {
+            width: 100%;
+            max-width: 1200px;
+        }
+
+        .difficulty-header {
+            text-align: center;
+            margin-bottom: clamp(24px, 5vw, 48px);
+            animation: fadeInDown 0.6s ease-out;
+        }
+
+        .difficulty-title {
+            font-size: clamp(1.8rem, 5vw, 3.5rem);
+            font-weight: 800;
+            margin: 0;
+            background: linear-gradient(45deg, var(--text-primary), var(--pro-end));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+        }
+
+        .difficulty-subtitle {
+            font-size: clamp(0.85rem, 2vw, 1.1rem);
+            color: var(--text-secondary);
+            margin-top: 12px;
+            opacity: 0.9;
+        }
+
+        /* ============================================ 
+           تخطيط Flexbox 2×2 — الحل المطلوب 
+           ============================================ */
+        .modes-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: clamp(16px, 3vw, 28px);
+            margin-bottom: clamp(24px, 5vw, 48px);
+            justify-content: center;
+            width: 100%;
+        }
+
+        .mode-btn {
+            flex: 0 0 calc(50% - 14px);
+            /* كل زر يأخذ نصف العرض ناقص نصف الفجوة */
+            max-width: calc(50% - 14px);
+            height: var(--btn-height);
+            padding: var(--btn-padding);
+            border: 1px solid var(--glass-border);
+            border-radius: var(--border-radius);
+            background: var(--glass-bg);
+            color: var(--text-primary);
+            cursor: pointer;
+            backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-soft);
+            transition: transform var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                box-shadow var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1),
+                border-color var(--transition-speed);
+            overflow: hidden;
+            isolation: isolate;
+        }
+
+        .mode-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.25), transparent);
+            transition: left 0.6s ease;
+            z-index: -1;
+        }
+
+        .mode-btn:hover::before {
+            left: 100%;
+        }
+
+        .mode-btn:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .mode-btn:active {
+            transform: translateY(-1px) scale(0.98);
+        }
+
+        .mode-btn:focus-visible {
+            outline: 3px solid currentColor;
+            outline-offset: 3px;
+        }
+
+        .mode-btn[aria-selected="true"] {
+            transform: scale(1.03);
+            box-shadow: var(--shadow-selected);
+            border-color: currentColor;
+            z-index: 2;
+        }
+
+        .mode-icon-wrapper {
+            width: var(--icon-size);
+            height: var(--icon-size);
+            flex-shrink: 0;
+            perspective: 1000px;
+        }
+
+        .mode-icon {
+            width: 100%;
+            height: 100%;
+            transition: transform var(--transition-speed) ease;
+        }
+
+        .mode-btn:hover .mode-icon {
+            transform: scale(1.08) rotateY(8deg);
+        }
+
+        .mode-info {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-align: right;
+            flex: 1;
+            min-width: 0;
+        }
+
+        .mode-label {
+            font-weight: 700;
+            font-size: clamp(1.2rem, 3vw, 1.4rem);
+            line-height: 1.3;
+            letter-spacing: 0.5px;
+        }
+
+        .mode-desc {
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            color: var(--text-secondary);
+            margin-top: 6px;
+            opacity: 0.9;
+            line-height: 1.4;
+        }
+
+        .mode-badge {
+            margin-right: auto;
+            padding: clamp(3px, 1vw, 6px) clamp(8px, 2vw, 12px);
+            border-radius: 20px;
+            font-size: clamp(0.65rem, 1.5vw, 0.75rem);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid currentColor;
+            color: currentColor;
+        }
+
+        .mode-badge.vip {
+            background: linear-gradient(45deg, #ffd700, #ffed4e);
+            color: #1a1a1a;
+            animation: vip-pulse 2s infinite;
+        }
+
+        @keyframes vip-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+            }
+
+            50% {
+                box-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+            }
+        }
+
+        .mode-btn.light {
+            color: var(--light-start);
+        }
+
+        .mode-btn.medium {
+            color: var(--medium-start);
+        }
+
+        .mode-btn.heavy {
+            color: var(--heavy-start);
+        }
+
+        .mode-btn.pro {
+            color: var(--pro-start);
+        }
+
+        .preview-box {
+            margin-top: clamp(24px, 5vw, 48px);
+            padding: clamp(16px, 3vw, 32px);
+            border-radius: var(--border-radius);
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(16px);
+            box-shadow: var(--shadow-soft);
+            transition: all var(--transition-speed) cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .preview-content {
+            display: flex;
+            align-items: center;
+            gap: clamp(16px, 3vw, 24px);
+            flex-wrap: wrap;
+        }
+
+        .preview-visual {
+            width: clamp(50px, 10vw, 80px);
+            height: clamp(50px, 10vw, 80px);
+            flex-shrink: 0;
+            border-radius: 12px;
+            background: currentColor;
+            opacity: 0.2;
+            transition: all var(--transition-speed) ease;
+            animation: preview-pulse 2s infinite;
+        }
+
+        .preview-text {
+            flex: 1;
+            min-width: min(100%, 250px);
+        }
+
+        .preview-title {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            font-weight: 700;
+            margin: 0 0 8px 0;
+            color: var(--text-primary);
+        }
+
+        .preview-desc {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: clamp(0.85rem, 2vw, 1rem);
+            line-height: 1.5;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px) scale(0.95);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes preview-pulse {
+
+            0%,
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 0.2;
+            }
+
+            50% {
+                transform: scale(1.05) rotate(2deg);
+                opacity: 0.35;
+            }
+        }
+
+        .mode-btn.light .pulse-dot {
+            animation: light-pulse 2s infinite;
+        }
+
+        @keyframes light-pulse {
+
+            0%,
+            100% {
+                r: 5;
+                opacity: 0.6;
+            }
+
+            50% {
+                r: 7;
+                opacity: 1;
+            }
+        }
+
+        .mode-btn.medium .bar {
+            animation: bar-grow 1.6s infinite;
+        }
+
+        .mode-btn.medium .bar:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .mode-btn.medium .bar:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .mode-btn.medium .bar:nth-child(3) {
+            animation-delay: 0.6s;
+        }
+
+        @keyframes bar-grow {
+
+            0%,
+            100% {
+                transform: scaleY(1) translateY(0);
+            }
+
+            50% {
+                transform: scaleY(1.2) translateY(-5%);
+            }
+        }
+
+        .mode-btn.heavy .particle {
+            animation: particle-float 1.8s infinite ease-in-out;
+        }
+
+        .mode-btn.heavy .particle:nth-child(1) {
+            animation-delay: 0s;
+        }
+
+        .mode-btn.heavy .particle:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .mode-btn.heavy .particle:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes particle-float {
+
+            0%,
+            100% {
+                transform: translateY(0) scale(1);
+            }
+
+            50% {
+                transform: translateY(-8px) scale(1.1);
+            }
+        }
+
+        .mode-btn.pro .star-rotate {
+            animation: star-twinkle 2.6s infinite;
+        }
+
+        @keyframes star-twinkle {
+
+            0%,
+            100% {
+                transform: scale(0.9) rotate(0deg);
+            }
+
+            50% {
+                transform: scale(1.1) rotate(18deg);
+            }
+        }
+
+        .mode-btn.pro .flame {
+            animation: flame-flicker 0.9s infinite;
+        }
+
+        @keyframes flame-flicker {
+
+            0%,
+            100% {
+                ry: 8;
+            }
+
+            50% {
+                ry: 12;
+            }
+        }
+
+        /* ==================== تخطيط متجاوب ==================== */
+        /* شاشات صغيرة جداً: عمود واحد */
+        @media (max-width: 600px) {
+            .mode-btn {
+                flex: 0 0 100%;
+                max-width: 100%;
+            }
+        }
+
+        /* شاشات كبيرة: 2×2 ثابت */
+        @media (min-width: 601px) {
+            .mode-btn {
+                flex: 0 0 calc(50% - 14px);
+                max-width: calc(50% - 14px);
+            }
+        }
+
+        /* شاشات فائقة العرض: 2×2 مع توسيع مسافات */
+        @media (min-width: 1400px) {
+            .modes-wrapper {
+                max-width: 1200px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    </style>
+</head>
+
+<body class="default">
+    <main class="difficulty-container">
+        <div class="difficulty-header">
+            <h2 class="difficulty-title">اختر مستوى الصعوبة</h2>
+            <p class="difficulty-subtitle">كل مستوى يقدّم تجربة فريدة مصمّمة خصيصاً لك</p>
+        </div>
+
+        <div class="modes-wrapper" role="tablist" aria-label="مستويات الصعوبة">
+            <button class="mode-btn light" data-mode="light" role="tab" aria-selected="false"
+                aria-controls="previewBox">
+                <div class="mode-icon-wrapper">
+                    <svg class="mode-icon" viewBox="0 0 64 64" aria-hidden="true">
+                        <defs>
+                            <radialGradient id="light-gradient">
+                                <stop offset="0%" stop-color="#00ff9d" />
+                                <stop offset="100%" stop-color="#00d4ff" />
+                            </radialGradient>
+                        </defs>
+                        <circle class="glow-bg" cx="32" cy="32" r="18" fill="url(#light-gradient)" />
+                        <circle class="pulse-dot" cx="32" cy="32" r="6" fill="#fff" />
+                    </svg>
+                </div>
+                <div class="mode-info">
+                    <span class="mode-label">خفيف</span>
+                    <span class="mode-desc">بداية مريحة مع إرشادات تفاعلية</span>
+                </div>
+                <div class="mode-badge">مبتدئ</div>
+            </button>
+
+            <button class="mode-btn medium" data-mode="medium" role="tab" aria-selected="false"
+                aria-controls="previewBox">
+                <div class="mode-icon-wrapper">
+                    <svg class="mode-icon" viewBox="0 0 64 64" aria-hidden="true">
+                        <rect class="bar" x="12" y="28" width="8" height="24" rx="2" fill="#ffd387" />
+                        <rect class="bar" x="28" y="20" width="8" height="32" rx="2" fill="#ffb74d" />
+                        <rect class="bar" x="44" y="12" width="8" height="40" rx="2" fill="#ff9800" />
+                    </svg>
+                </div>
+                <div class="mode-info">
+                    <span class="mode-label">متوسط</span>
+                    <span class="mode-desc">تحدٍّ متوازن مع ميزات متقدمة</span>
+                </div>
+                <div class="mode-badge">محترف</div>
+            </button>
+
+            <button class="mode-btn heavy" data-mode="heavy" role="tab" aria-selected="false"
+                aria-controls="previewBox">
+                <div class="mode-icon-wrapper">
+                    <svg class="mode-icon" viewBox="0 0 64 64" aria-hidden="true">
+                        <g class="particles">
+                            <circle class="particle" cx="20" cy="36" r="5" fill="#ff4d94" />
+                            <circle class="particle" cx="32" cy="20" r="7" fill="#ff2d92" />
+                            <circle class="particle" cx="44" cy="44" r="9" fill="#ff006e" />
+                        </g>
+                    </svg>
+                </div>
+                <div class="mode-info">
+                    <span class="mode-label">ثقيل</span>
+                    <span class="mode-desc">تحدٍّ قوي للخبراء</span>
+                </div>
+                <div class="mode-badge">خبير</div>
+            </button>
+
+            <button class="mode-btn pro" data-mode="pro" role="tab" aria-selected="false" aria-controls="previewBox">
+                <div class="mode-icon-wrapper">
+                    <svg class="mode-icon" viewBox="0 0 64 64" aria-hidden="true">
+                        <defs>
+                            <linearGradient id="pro-gradient" x1="0%" x2="100%">
+                                <stop offset="0%" stop-color="#ff00cc" />
+                                <stop offset="100%" stop-color="#00ccff" />
+                            </linearGradient>
+                            <filter id="pro-glow" x="-50%" y="-50%" width="200%" height="200%">
+                                <feGaussianBlur stdDeviation="4" result="blur" />
+                                <feMerge>
+                                    <feMergeNode in="blur" />
+                                    <feMergeNode in="SourceGraphic" />
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        <g class="rocket-group">
+                            <path d="M34 10 L42 28 L34 46 L26 28 Z" fill="url(#pro-gradient)" filter="url(#pro-glow)" />
+                            <circle cx="32" cy="28" r="4" fill="#08213a" />
+                            <ellipse class="flame" cx="32" cy="54" rx="6" ry="8" fill="#ffd07a" />
+                            <g class="star-rotate">
+                                <polygon points="2,0 3,3 6,3.5 3.8,5.8 4.3,9 2,7.2 -0.3,9 0.2,5.8 -1.8,3.5 1,3"
+                                    fill="#fff" />
+                            </g>
+                        </g>
+                    </svg>
+                </div>
+                <div class="mode-info">
+                    <span class="mode-label">متخصص ✨</span>
+                    <span class="mode-desc">أقصى قدرات مع إعدادات احترافية</span>
+                </div>
+                <div class="mode-badge vip">VIP</div>
+            </button>
+        </div>
+
+        <section class="preview-box" id="previewBox" aria-live="polite">
+            <div class="preview-content">
+                <div class="preview-visual" id="previewVisual"></div>
+                <div class="preview-text">
+                    <h3 class="preview-title" id="previewTitle">معاينة مستوى الصعوبة</h3>
+                    <p class="preview-desc" id="previewExplanation">اختر مستوى لتشاهد التأثيرات الحية</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        class DifficultySelectorEnhanced {
+            constructor() {
+                this.modeButtons = document.querySelectorAll('.mode-btn');
+                this.previewBox = document.getElementById('previewBox');
+                this.previewTitle = document.getElementById('previewTitle');
+                this.previewDesc = document.getElementById('previewExplanation');
+                this.previewVisual = document.getElementById('previewVisual');
+                this.currentMode = null;
+                this.isInitialized = false;
+
+                this.init();
+            }
+
+            modeData = {
+                light: {
+                    title: '🌟 خفيف — بداية مريحة',
+                    desc: 'تجربة سلسة مع إرشادات تفاعلية وخطوات واضحة، مثالية للمبتدئين.',
+                    color: '#00ff9d'
+                },
+                medium: {
+                    title: '📊 متوسط — التوازن المثالي',
+                    desc: 'مزيج مثالي بين التحدي والمتعة مع ميزات ذكية ونصائح ملائمة.',
+                    color: '#ffb74d'
+                },
+                heavy: {
+                    title: '⚡ ثقيل — للخبراء فقط',
+                    desc: 'تحديات معقدة، مؤثرات قوية، وسرعة فائقة تتطلب مهارات عالية.',
+                    color: '#ff006e'
+                },
+                pro: {
+                    title: '🚀 متخصص — تجربة VIP',
+                    desc: 'إمكانيات غير محدودة، إعدادات احترافية، وتصميم فريد للمستخدمين المحترفين.',
+                    color: '#ff00cc'
+                }
+            };
+
+            init() {
+                this.bindEvents();
+                this.loadSavedMode();
+                this.handleSystemTheme();
+            }
+
+            bindEvents() {
+                let isProcessing = false;
+
+                this.modeButtons.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        if (isProcessing) return;
+                        isProcessing = true;
+                        this.setMode(btn.dataset.mode);
+                        setTimeout(() => { isProcessing = false; }, 300);
+                    });
+
+                    btn.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            if (isProcessing) return;
+                            isProcessing = true;
+                            this.setMode(btn.dataset.mode);
+                            setTimeout(() => { isProcessing = false; }, 300);
+                        }
+                        this.handleKeyboardNavigation(e);
+                    });
+
+                    if (window.matchMedia('(hover: hover)').matches) {
+                        btn.addEventListener('mouseenter', () => {
+                            this.previewVisual.style.background = getComputedStyle(btn).color;
+                            this.previewVisual.style.opacity = '0.25';
+                        });
+                    }
+
+                    this.addTouchSupport(btn);
+                });
+
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                    this.updateBodyClass(this.currentMode || 'light');
+                });
+            }
+
+            addTouchSupport(btn) {
+                let touchTimeout;
+                btn.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    btn.classList.add('touch-active');
+                    clearTimeout(touchTimeout);
+                });
+
+                btn.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    touchTimeout = setTimeout(() => btn.classList.remove('touch-active'), 150);
+                    this.setMode(btn.dataset.mode);
+                });
+
+                btn.addEventListener('touchcancel', () => btn.classList.remove('touch-active'));
+            }
+
+            handleKeyboardNavigation(e) {
+                const buttons = Array.from(this.modeButtons);
+                const currentIndex = buttons.indexOf(e.currentTarget);
+                let nextIndex = currentIndex;
+
+                switch (e.key) {
+                    case 'ArrowRight': case 'ArrowDown':
+                        nextIndex = (currentIndex + 1) % buttons.length;
+                        break;
+                    case 'ArrowLeft': case 'ArrowUp':
+                        nextIndex = (currentIndex - 1 + buttons.length) % buttons.length;
+                        break;
+                    default: return;
+                }
+
+                e.preventDefault();
+                buttons[nextIndex].focus();
+            }
+
+            setMode(mode) {
+                if (this.currentMode === mode) return;
+
+                this.currentMode = mode;
+                localStorage.setItem('difficultyMode', mode);
+
+                this.updateButtonStates(mode);
+                this.updatePreview(mode);
+                this.updateBodyClass(mode);
+                this.animatePreviewTransition();
+
+                window.dispatchEvent(new CustomEvent('difficultyChanged', {
+                    detail: { mode, timestamp: Date.now(), modeData: this.modeData[mode] }
+                }));
+            }
+
+            updateButtonStates(mode) {
+                this.modeButtons.forEach(btn => {
+                    const isSelected = btn.dataset.mode === mode;
+                    btn.setAttribute('aria-selected', isSelected);
+                    btn.setAttribute('tabindex', isSelected ? '0' : '-1');
+                });
+            }
+
+            updatePreview(mode) {
+                const data = this.modeData[mode];
+                if (!data) return;
+
+                this.previewBox.style.opacity = '0';
+                this.previewBox.style.transform = 'translateY(10px)';
+
+                setTimeout(() => {
+                    this.previewTitle.textContent = data.title;
+                    this.previewDesc.textContent = data.desc;
+                    this.previewVisual.style.background = data.color;
+                    this.previewVisual.style.opacity = '0.2';
+                    this.previewBox.style.opacity = '1';
+                    this.previewBox.style.transform = '';
+                }, 100);
+            }
+
+            animatePreviewTransition() {
+                this.previewBox.style.transform = 'scale(0.97)';
+                this.previewBox.style.opacity = '0.7';
+
+                requestAnimationFrame(() => {
+                    setTimeout(() => {
+                        this.previewBox.style.transform = '';
+                        this.previewBox.style.opacity = '';
+                    }, 50);
+                });
+            }
+
+            updateBodyClass(mode) {
+                const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                const themePrefix = isDarkMode ? 'mode-dark' : 'mode-light';
+
+                document.body.className = document.body.className
+                    .split(' ')
+                    .filter(cls => !cls.startsWith('mode-') || cls === 'mode-dark' || cls === 'mode-light')
+                    .join(' ');
+
+                document.body.classList.add(`${themePrefix}-${mode}`);
+            }
+
+            handleSystemTheme() {
+                window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+                    this.updateBodyClass(this.currentMode || 'light');
+                });
+            }
+
+            loadSavedMode() {
+                const savedMode = localStorage.getItem('difficultyMode') || 'light';
+                setTimeout(() => {
+                    this.setMode(savedMode);
+                    this.isInitialized = true;
+                }, 100);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new DifficultySelectorEnhanced();
+        });
+    </script>
+</body>
+
+</html>

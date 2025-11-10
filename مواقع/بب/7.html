@@ -1,0 +1,795 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="description" content="تعليم بطريقة ممتعة وشاملة مع افضل المعمل الاكتروني والالعاب المفيدة والممتعه واكثر من 1000 سؤال وزاري وتقيم مستوئ الطالب وتحليل مستوئ الطالب و متابعة الطالب 24ساعة وتحديد نقاط الضعف والقوةوتحديد التخصص الجامعي المناسب وتعليمة وتدريبة على مهارت اخرئ مثل الاستثمار والتجارة و البرمجة لتشجيع الطالب على التعليم">
+    <meta property="og:title" content="عالم امبراطورية المدراسة الجديدة">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="تعليم بطريقة ممتعة وشاملة مع افضل المعمل الاكتروني والالعاب المفيدة والممتعه واكثر من 1000 سؤال وزاري وتقيم مستوئ الطالب وتحليل مستوئ الطالب و متابعة الطالب 24ساعة وتحديد نقاط الضعف والقوةوتحديد التخصص الجامعي المناسب وتعليمة وتدريبة على مهارت اخرئ مثل الاستثمار والتجارة و البرمجة لتشجيع الطالب على التعليم">
+    <meta property="og:url" content="www.NewSchoolEmpireWorld.net">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="../../css/log/الرائسية.css">
+    <!-- <link rel="stylesheet" href="../../css/log/انشاء حساب.css"> -->
+    <style>
+        /* 📁 انشاء حساب.css */
+        /* Variables from الرائسية.css for consistent theming */
+        
+         :root {
+            --bg-color: #f0f2f5;
+            --text-color: #222;
+            --primary-color: #007bff;
+            --button-bg: #e0e0e0;
+            --sidebar-bg: #fff;
+            --yellow-text: #e6f7f;
+            /* This seems like a typo, assuming it should be a color, fixing to something like light yellow */
+            --error-color: #ff4500;
+            /* A clear error color */
+            --valid-color: #28a745;
+            /* A clear valid color */
+            /* Existing theme variables from انشاء حساب.css */
+            --blue--: #007bff;
+            --yellow--: #e6f7f0;
+            /* Adjusted to be a valid color */
+            --amjad--: rgb(15, 105, 161);
+            --dark-bg: #121212;
+            --light-bg: #fefefe;
+            --main-color: #007bff;
+            --female-dark: #2c003e;
+            --female-light: #ffe6f2;
+            --male-dark: #002b36;
+            --male-light: #e6f7ff;
+        }
+        /* Base styles to integrate with main theme */
+        
+        body {
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
+        
+        .main-header {
+            padding: 1rem;
+            text-align: center;
+            background: rgba(0, 0, 0, 0.2);
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: var(--text-color);
+            margin-bottom: 20px;
+        }
+        /* Form container */
+        
+        form {
+            background-color: var(--sidebar-bg);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            max-width: 500px;
+            width: 90%;
+            margin: 20px auto;
+        }
+        /* Input field beautification */
+        
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        select {
+            width: calc(100% - 20px);
+            /* Adjust width for padding */
+            padding: 12px 10px;
+            margin: 0;
+            /* Removed default margin */
+            border: 1px solid var(--button-bg);
+            background-color: var(--button-bg);
+            border-radius: 8px;
+            color: var(--text-color);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            outline: none;
+            box-sizing: border-box;
+            /* Include padding in width */
+        }
+        
+        input::placeholder {
+            color: rgba(var(--text-color), 0.6);
+            /* Placeholder color visible with theme text color */
+            font-size: medium;
+            font-weight: normal;
+        }
+        
+        input:focus,
+        select:focus {
+            border-color: var(--primary-color);
+            /* Highlight on focus */
+            box-shadow: 0 0 0 3px rgba(var(--primary-color), 0.2);
+            background-color: var(--sidebar-bg);
+            /* Lighter background on focus */
+            color: var(--text-color);
+        }
+        /* Error message styling (validation) */
+        
+        .true:invalid {
+            border-color: var(--error-color);
+            box-shadow: 0 0 0 3px rgba(var(--error-color), 0.2);
+        }
+        
+        .true:valid {
+            border-color: var(--valid-color);
+            box-shadow: 0 0 0 3px rgba(var(--valid-color), 0.2);
+        }
+        
+        label {
+            color: var(--text-color);
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        /* Gender radio buttons */
+        
+        input[type="radio"].sex {
+            width: auto;
+            margin-right: 5px;
+            accent-color: var(--primary-color);
+            /* Changes the color of the radio button itself */
+        }
+        
+        input[type="radio"].sex+label {
+            display: inline-block;
+            margin-left: 5px;
+            font-weight: normal;
+        }
+        /* Button styling */
+        
+        .form-actions {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+        
+        .form-actions button,
+        .form-actions a {
+            padding: 12px 25px;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+            text-decoration: none;
+            text-align: center;
+            display: inline-block;
+            white-space: nowrap;
+        }
+        
+        .form-actions button {
+            border: none;
+            background-color: var(--primary-color);
+            /* Primary color for submit button */
+            color: white;
+            box-shadow: 0 4px 10px rgba(var(--primary-color), 0.3);
+        }
+        
+        .form-actions a {
+            border: 2px solid var(--primary-color);
+            background-color: transparent;
+            color: var(--primary-color);
+            box-shadow: 0 4px 10px rgba(var(--primary-color), 0.1);
+        }
+        /* Hover effects for buttons */
+        
+        .form-actions button:hover {
+            transform: translateY(-2px);
+            filter: brightness(1.1);
+            box-shadow: 0 6px 15px rgba(var(--primary-color), 0.4);
+        }
+        
+        .form-actions a:hover {
+            transform: translateY(-2px);
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 6px 15px rgba(var(--primary-color), 0.4);
+        }
+        
+        a[data-translate="has_account"] {
+            display: block;
+            margin-top: 20px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+        
+        a[data-translate="has_account"]:hover {
+            color: var(--text-color);
+        }
+        /* Specific theme adjustments from original انشاء حساب.css (kept) */
+        
+        body.theme-dark-male {
+            background-color: var(--male-dark);
+            color: #00aaff;
+        }
+        
+        body.theme-dark-male h1,
+        body.theme-dark-male label {
+            color: #00aaff;
+        }
+        
+        body.theme-dark-male form {
+            background-color: #001f28;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        body.theme-dark-male input,
+        body.theme-dark-male select {
+            background-color: rgba(0, 170, 255, 0.1);
+            border-color: rgba(0, 170, 255, 0.3);
+            color: #00aaff;
+        }
+        
+        body.theme-dark-male input::placeholder {
+            color: rgba(0, 170, 255, 0.6);
+        }
+        
+        body.theme-dark-male input:focus,
+        body.theme-dark-male select:focus {
+            border-color: #00aaff;
+            box-shadow: 0 0 0 3px rgba(0, 170, 255, 0.3);
+            background-color: #001f28;
+        }
+        
+        body.theme-dark-female {
+            background-color: var(--female-dark);
+            color: #ff99cc;
+        }
+        
+        body.theme-dark-female h1,
+        body.theme-dark-female label {
+            color: #ff99cc;
+        }
+        
+        body.theme-dark-female form {
+            background-color: #260036;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        body.theme-dark-female input,
+        body.theme-dark-female select {
+            background-color: rgba(255, 153, 204, 0.1);
+            border-color: rgba(255, 153, 204, 0.3);
+            color: #ff99cc;
+        }
+        
+        body.theme-dark-female input::placeholder {
+            color: rgba(255, 153, 204, 0.6);
+        }
+        
+        body.theme-dark-female input:focus,
+        body.theme-dark-female select:focus {
+            border-color: #ff99cc;
+            box-shadow: 0 0 0 3px rgba(255, 153, 204, 0.3);
+            background-color: #260036;
+        }
+        
+        body.theme-light-male {
+            background-color: var(--male-light);
+            color: var(--blue--);
+        }
+        
+        body.theme-light-male h1,
+        body.theme-light-male label {
+            color: var(--blue--);
+        }
+        
+        body.theme-light-male form {
+            background-color: #ffffff;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        body.theme-light-male input,
+        body.theme-light-male select {
+            background-color: #e6f7ff;
+            border-color: #b3e0ff;
+            color: var(--blue--);
+        }
+        
+        body.theme-light-male input::placeholder {
+            color: rgba(0, 123, 255, 0.6);
+        }
+        
+        body.theme-light-male input:focus,
+        body.theme-light-male select:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.2);
+            background-color: #ffffff;
+        }
+        
+        body.theme-light-female {
+            background-color: var(--female-light);
+            color: #e91e63;
+        }
+        
+        body.theme-light-female h1,
+        body.theme-light-female label {
+            color: #e91e63;
+        }
+        
+        body.theme-light-female form {
+            background-color: #ffffff;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        body.theme-light-female input,
+        body.theme-light-female select {
+            background-color: #ffe6f2;
+            border-color: #ffb3d9;
+            color: #e91e63;
+        }
+        
+        body.theme-light-female input::placeholder {
+            color: rgba(233, 30, 99, 0.6);
+        }
+        
+        body.theme-light-female input:focus,
+        body.theme-light-female select:focus {
+            border-color: #e91e63;
+            box-shadow: 0 0 0 3px rgba(233, 30, 99, 0.2);
+            background-color: #ffffff;
+        }
+    </style>
+    <title>انشاء حساب</title>
+</head>
+
+<body class="default fade-in">
+    <center>
+        <div class="main-header">
+            <h1 data-translate="signup_title">إنشاء الحساب</h1>
+            <div class="lang-theme-switcher">
+                <div class="theme-select" tabindex="0">
+                    <button id="themeBtn" aria-haspopup="listbox" aria-expanded="false" aria-controls="themeList" aria-label="اختيار الثيم">اختر الثيم 🎨</button>
+                    <div id="themeList" class="theme-list" role="listbox" tabindex="-1" aria-labelledby="themeBtn">
+                        <button data-theme="default" role="option" tabindex="0"><span class="color-circle color-default"></span> افتراضي</button>
+                        <button data-theme="dark" role="option" tabindex="0"><span class="color-circle color-dark"></span> داكن</button>
+                        <button data-theme="pink" role="option" tabindex="0"><span class="color-circle color-pink"></span> وردي</button>
+                        <button data-theme="blueanime" role="option" tabindex="0"><span class="color-circle color-blueanime"></span> أزرق أنمي</button>
+                        <button data-theme="theme1" role="option" tabindex="0"><span class="color-circle color-theme1"></span> ثيم 1</button>
+                        <button data-theme="theme2" role="option" tabindex="0"><span class="color-circle color-theme2"></span> ثيم 2</button>
+                        <button data-theme="theme3" role="option" tabindex="0"><span class="color-circle color-theme3"></span> ثيم 3</button>
+                        <button data-theme="theme4" role="option" tabindex="0"><span class="color-circle color-theme4"></span> ثيم 4</button>
+                        <button data-theme="theme5" role="option" tabindex="0"><span class="color-circle color-theme5"></span> ثيم 5</button>
+                        <button data-theme="theme6" role="option" tabindex="0"><span class="color-circle color-theme6"></span> ثيم 6</button>
+                        <button data-theme="theme7" role="option" tabindex="0"><span class="color-circle color-theme7"></span> ثيم 7</button>
+                        <button data-theme="theme8" role="option" tabindex="0"><span class="color-circle color-theme8"></span> ثيم 8</button>
+                        <button data-theme="theme9" role="option" tabindex="0"><span class="color-circle color-theme9"></span> ثيم 9</button>
+                    </div>
+                </div>
+
+                <select id="langSelect" onchange="setLanguage(this.value)" aria-label="اختر اللغة">
+                    <option value="ar">🇾🇪 العربية</option>
+                    <option value="en">🇺🇸 English</option>
+                    <option value="ja">🇯🇵 日本語</option>
+                    <option value="ko">🇰🇷 한국어</option>
+                    <option value="zh">🇨🇳 中文</option>
+                    <option value="es">🇪🇸 Español</option>
+                    <option value="fr">🇫🇷 Français</option>
+                    <option value="it">🇮🇹 Italiano</option>
+                </select>
+            </div>
+        </div>
+
+        <form>
+            <label for="firstName" data-translate="first_name">الاسم</label>
+            <input type="text" id="firstName" name="firstName" required class="true" placeholder="اسمك الثلاثي">
+
+            <label for="birthPlaceDate" data-translate="birth_place_date">تاريخ ومكان الميلاد</label>
+            <input type="text" id="birthPlaceDate" name="birthPlaceDate" required class="true" placeholder="مثال: صنعاء - 2005/1/1">
+
+            <label for="governorate" data-translate="governorate">المحافظة</label>
+            <select id="governorate" name="governorate" required class="true"></select>
+
+            <label for="district" data-translate="district">المديرية</label>
+            <select id="district" name="district" required class="true"></select>
+
+            <label for="school" data-translate="school">اسم المدرسة</label>
+            <input type="text" id="school" name="school" required class="true" placeholder="اسم المدرسة">
+
+            <label for="phone" data-translate="phone">أرقام التواصل</label>
+            <input type="tel" id="phone" name="phone" required class="true" placeholder="رقم هاتفك">
+
+            <label for="email" data-translate="email">البريد الإلكتروني</label>
+            <input type="email" id="email" name="email" required class="true" placeholder="بريدك الإلكتروني">
+
+            <label for="guardianNumber" data-translate="guardian_number">رقم ولي الأمر</label>
+            <input type="tel" id="guardianNumber" name="guardianNumber" required class="true" placeholder="رقم ولي الأمر">
+
+            <label data-translate="gender">الجنس</label>
+            <div>
+                <input type="radio" id="male" name="gender" value="male" class="sex" required>
+                <label for="male" data-translate="male">ذكر</label>
+                <input type="radio" id="female" name="gender" value="female" class="sex" required>
+                <label for="female" data-translate="female">أنثى</label>
+            </div>
+
+            <label for="dreamMajor" data-translate="dream_major">التخصص الذي تحلم به</label>
+            <input type="text" id="dreamMajor" name="dreamMajor" required class="true" placeholder="تخصصك المستقبلي">
+
+            <div class="form-actions">
+                <button type="submit" data-translate="submit">تم</button>
+                <a href="الرائسية.html" data-translate="back">الرجوع</a>
+            </div>
+            <a href="تسجيل الدخول.html" data-translate="has_account">امتلك حساب</a>
+        </form>
+    </center>
+
+    <script src="" defer>
+        // 📁 app.js
+        // ملف JavaScript كامل يحتوي على الترجمات + المحافظات + المديريات + حفظ اللغة
+
+        const translations = {
+            ar: {
+                signup_title: "إنشاء الحساب",
+                first_name: "الاسم",
+                birth_place_date: "تاريخ ومكان الميلاد",
+                governorate: "المحافظة",
+                district: "المديرية",
+                school: "اسم المدرسة",
+                phone: "أرقام التواصل",
+                email: "البريد الإلكتروني",
+                guardian_number: "رقم ولي الأمر",
+                gender: "الجنس",
+                male: "ذكر",
+                female: "أنثى",
+                dream_major: "التخصص الذي تحلم به",
+                submit: "تم",
+                back: "الرجوع",
+                has_account: "امتلك حساب"
+            },
+            en: {
+                signup_title: "Sign Up",
+                first_name: "Full Name",
+                birth_place_date: "Birth Date & Place",
+                governorate: "Governorate",
+                district: "District",
+                school: "School Name",
+                phone: "Contact Numbers",
+                email: "Email",
+                guardian_number: "Guardian Phone",
+                gender: "Gender",
+                male: "Male",
+                female: "Female",
+                dream_major: "Dream Major",
+                submit: "Submit",
+                back: "Back",
+                has_account: "Already have an account"
+            },
+            ja: {
+                signup_title: "アカウント作成",
+                first_name: "氏名",
+                birth_place_date: "生年月日と出生地",
+                governorate: "県",
+                district: "地区",
+                school: "学校名",
+                phone: "連絡先",
+                email: "メールアドレス",
+                guardian_number: "保護者の電話番号",
+                gender: "性別",
+                male: "男性",
+                female: "女性",
+                dream_major: "志望専攻",
+                submit: "登録",
+                back: "戻る",
+                has_account: "すでにアカウントを持っている"
+            },
+            ko: {
+                signup_title: "회원가입",
+                first_name: "이름",
+                birth_place_date: "생년월일 및 출생지",
+                governorate: "도",
+                district: "구",
+                school: "학교명",
+                phone: "연락처",
+                email: "이메일",
+                guardian_number: "보호자 번호",
+                gender: "성별",
+                male: "남성",
+                female: "여성",
+                dream_major: "희망 전공",
+                submit: "제출",
+                back: "뒤로가기",
+                has_account: "이미 계정이 있습니다"
+            },
+            zh: {
+                signup_title: "注册账户",
+                first_name: "姓名",
+                birth_place_date: "出生日期与地点",
+                governorate: "省",
+                district: "区",
+                school: "学校名称",
+                phone: "联系电话",
+                email: "电子邮件",
+                guardian_number: "监护人电话",
+                gender: "性别",
+                male: "男",
+                female: "女",
+                dream_major: "理想专业",
+                submit: "提交",
+                back: "返回",
+                has_account: "已有账户"
+            },
+            es: {
+                signup_title: "Crear cuenta",
+                first_name: "Nombre completo",
+                birth_place_date: "Fecha y lugar de nacimiento",
+                governorate: "Provincia",
+                district: "Distrito",
+                school: "Nombre de la escuela",
+                phone: "Teléfonos de contacto",
+                email: "Correo electrónico",
+                guardian_number: "Teléfono del tutor",
+                gender: "Género",
+                male: "Hombre",
+                female: "Mujer",
+                dream_major: "Especialidad soñada",
+                submit: "Enviar",
+                back: "Atrás",
+                has_account: "Ya tengo una cuenta"
+            },
+            fr: {
+                signup_title: "Créer un compte",
+                first_name: "Nom complet",
+                birth_place_date: "Date et lieu de naissance",
+                governorate: "Gouvernorat",
+                district: "District",
+                school: "Nom de l'école",
+                phone: "Numéros de contact",
+                email: "Email",
+                guardian_number: "Téléphone du tuteur",
+                gender: "Genre",
+                male: "Homme",
+                female: "Femme",
+                dream_major: "Spécialité rêvée",
+                submit: "Valider",
+                back: "Retour",
+                has_account: "J'ai déjà un compte"
+            },
+            it: {
+                signup_title: "Crea un account",
+                first_name: "Nome completo",
+                birth_place_date: "Data e luogo di nascita",
+                governorate: "Provincia",
+                district: "Distretto",
+                school: "Nome della scuola",
+                phone: "Numeri di contatto",
+                email: "Email",
+                guardian_number: "Numero del tutore",
+                gender: "Genere",
+                male: "Maschio",
+                female: "Femmina",
+                dream_major: "Specializzazione desiderata",
+                submit: "Invia",
+                back: "Indietro",
+                has_account: "Hai già un account"
+            }
+        };
+
+        const governorates = {
+            "ar": {
+                "صنعاء": ["السبعين", "وحدة", "آزال", "الصافية", "التحرير", "شعوب", "معين", "الثورة"],
+                "عدن": ["الشيخ عثمان", "المنصورة", "التواهي", "كريتر", "المعلا", "البريقة", "دار سعد", "خور مكسر"],
+                "تعز": ["المظفر", "صالة", "القاهرة", "التعزية", "المعافر", "جبل حبشي", "المخا"],
+                "الحديدة": ["الحالي", "الميناء", "الضباعي", "التحيتا", "اللحية"],
+                "إب": ["الظهار", "جبلة", "المشنة", "حزم العدين"],
+                "حضرموت": ["المكلا", "سيئون", "الشحر", "تريم", "دوعن"],
+                "أبين": ["زنجبار", "جعار", "لودر", "الوضيع"],
+                "لحج": ["الحوطة", "المسيمير", "تبن", "يافع"],
+                "شبوة": ["عتق", "بيحان", "ميفعة", "الروضة"],
+                "مأرب": ["مدينة مأرب", "صراوح", "حريب", "مدغل الجدعان"],
+                "الضالع": ["الضالع", "قعطبة", "الأزارق", "الشعيب"],
+                "المحويت": ["المحويت", "حفاش", "شبام كوكبان"],
+                "عمران": ["عمران", "ظليمة", "حرف سفيان"],
+                "الجوف": ["الحزم", "الغيل", "الزاهر"],
+                "حجة": ["حجة", "عبس", "مستباء"],
+                "ذمار": ["ذمار", "عتمة", "المنار"],
+                "صعدة": ["صعدة", "رازح", "الحشوة"],
+                "البيضاء": ["البيضاء", "رداع", "مكيراس"],
+                "": [""] // Default empty option
+            },
+            "en": {
+                "Sana'a": ["Al-Sabeen", "Wahdah", "A'azal", "Al-Safiyah", "Al-Tahrir", "Sha'oub", "Ma'ain", "Al-Thawrah"],
+                "Aden": ["Sheikh Othman", "Al-Mansoura", "Al-Tawahi", "Crater", "Al-Ma'alla", "Al-Buraiqa", "Dar Sa'ad", "Khormaksar"],
+                "Taiz": ["Al-Muzaffar", "Salah", "Al-Qahirah", "Al-Ta'iziyah", "Al-Ma'afer", "Jabal Habashi", "Al-Mukha"],
+                "Hodeidah": ["Al-Hali", "Al-Mina", "Al-Dhabyani", "Al-Tuhaita", "Al-Luhiyah"],
+                "Ibb": ["Al-Dhahhar", "Jiblah", "Al-Mashnah", "Hazm Al-Udayn"],
+                "Hadhramaut": ["Mukalla", "Seiyun", "Ash Shihr", "Tarim", "Daw'an"],
+                "Abyan": ["Zinjibar", "Ja'ar", "Lawdar", "Al-Wade'a"],
+                "Lahj": ["Al-Houta", "Al-Musaimir", "Tuban", "Yafae"],
+                "Shabwah": ["Ataq", "Bayhan", "Mayfa'a", "Al-Rawdah"],
+                "Marib": ["Marib City", "Sarawah", "Harib", "Majzer"],
+                "Al Dhale'e": ["Al Dhale'e", "Qa'tabah", "Al-Azariq", "Ash Shu'ayb"],
+                "Al Mahwit": ["Al Mahwit", "Hufash", "Shibam Kawkaban"],
+                "Amran": ["Amran", "Dhamar", "Harf Sufyan"],
+                "Al Jawf": ["Al Hazm", "Al Ghayl", "Az Zahir"],
+                "Hajjah": ["Hajjah", "Abs", "Mustaba'a"],
+                "Dhamar": ["Dhamar", "Utmah", "Al Manar"],
+                "Sa'dah": ["Sa'dah", "Razih", "Al Hashwah"],
+                "Al Bayda": ["Al Bayda", "Rada'a", "Mukayras"],
+                "": [""] // Default empty option
+            },
+            // Add other languages here following the same structure
+        };
+
+        function loadLanguage(lang) {
+            const words = translations[lang];
+            if (!words) return;
+
+            document.querySelectorAll("[data-translate]").forEach((el) => {
+                const key = el.getAttribute("data-translate");
+                if (words[key]) {
+                    el.innerHTML = words[key];
+                }
+            });
+
+            document.documentElement.setAttribute("lang", lang);
+            document.documentElement.setAttribute("dir", lang === "ar" ? "rtl" : "ltr");
+            localStorage.setItem("preferredLang", lang);
+
+            populateGovernorates(lang); // Re-populate governorates on language change
+        }
+
+        function populateGovernorates(lang = localStorage.getItem('preferredLang') || 'ar') {
+            const governorateSelect = document.getElementById("governorate");
+            governorateSelect.innerHTML = `<option value="">${lang === 'ar' ? 'اختر المحافظة' : 'Select Governorate'}</option>`; // Default option
+
+            const currentGovernorates = governorates[lang] || governorates['ar'];
+            for (const gov in currentGovernorates) {
+                if (gov === "") continue; // Skip the empty key
+                const option = document.createElement("option");
+                option.value = gov;
+                option.textContent = gov;
+                governorateSelect.appendChild(option);
+            }
+
+            // Reset district select
+            const districtSelect = document.getElementById("district");
+            if (districtSelect) {
+                districtSelect.innerHTML = `<option value="">${lang === 'ar' ? 'اختر المديرية' : 'Select District'}</option>`;
+                districtSelect.disabled = true;
+            }
+        }
+
+        function populateDistricts(lang = localStorage.getItem('preferredLang') || 'ar') {
+            const governorateSelect = document.getElementById("governorate");
+            const districtSelect = document.getElementById("district");
+            const selectedGovernorate = governorateSelect.value;
+
+            districtSelect.innerHTML = `<option value="">${lang === 'ar' ? 'اختر المديرية' : 'Select District'}</option>`;
+
+            if (selectedGovernorate && governorates[lang] && governorates[lang][selectedGovernorate]) {
+                governorates[lang][selectedGovernorate].forEach(district => {
+                    if (district === "") return; // Skip the empty key
+                    const option = document.createElement("option");
+                    option.value = district;
+                    option.textContent = district;
+                    districtSelect.appendChild(option);
+                });
+                districtSelect.disabled = false;
+            } else {
+                districtSelect.disabled = true;
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedLang = localStorage.getItem("preferredLang") || "ar";
+            loadLanguage(savedLang);
+
+            // Set the selected language in the dropdown
+            const langSelect = document.getElementById('langSelect');
+            if (langSelect) {
+                langSelect.value = savedLang;
+            }
+
+            populateGovernorates(savedLang);
+
+            const governorateSelect = document.getElementById("governorate");
+            if (governorateSelect) {
+                governorateSelect.addEventListener("change", () => populateDistricts(localStorage.getItem('preferredLang') || 'ar'));
+            }
+        });
+    </script>
+    <script src="" defer>
+        // 📁 انشاء حساب.js
+
+        // ------------------ دالة showTab (لا تزال فارغة لأنها لا تستخدم في هذه الصفحة) ------------------
+        function showTab(tabName) {
+            const tabContent = document.getElementById('tab-content');
+            if (tabContent) {
+                tabContent.classList.remove('fade-in');
+                void tabContent.offsetWidth; // لإعادة تفعيل الأنيميشن
+                // لا يوجد محتوى للتابات في هذه الصفحة، لذا تظل فارغة
+            }
+        }
+
+        // ------------------ تغيير الثيم (متناسق مع الرائسية.js) ------------------
+        const ALL_THEMES = [
+            'default', 'dark', 'pink', 'blueanime', 'theme1', 'theme2', 'theme3', 'theme4', 'theme5', 'theme6', 'theme7', 'theme8', 'theme9',
+            'theme-dark-male', 'theme-dark-female', 'theme-light-male', 'theme-light-female' // Keep existing themes
+        ];
+
+        function setTheme(themeName) {
+            document.body.classList.remove(...ALL_THEMES);
+            if (ALL_THEMES.includes(themeName)) {
+                document.body.classList.add(themeName);
+                localStorage.setItem('selectedTheme', themeName);
+            }
+        }
+
+        // ------------------ تحميل الإعدادات عند فتح الصفحة ------------------
+        window.addEventListener('DOMContentLoaded', () => {
+            // تحميل الثيم واللغة المحفوظة
+            const savedTheme = localStorage.getItem('selectedTheme') || 'default';
+            const savedLang = localStorage.getItem('preferredLang') || 'ar'; // Using preferredLang from app.js
+            setTheme(savedTheme);
+            loadLanguage(savedLang); // Call loadLanguage from app.js
+
+            // تحديث قائمة اختيار اللغة بالقيمة المحفوظة
+            const langSelect = document.getElementById('langSelect');
+            if (langSelect) langSelect.value = savedLang;
+
+            // ----- تشغيل قائمة اختيار الثيم الجديدة -----
+            const themeBtn = document.getElementById('themeBtn');
+            const themeList = document.getElementById('themeList');
+            const themeOptions = themeList ? themeList.querySelectorAll('button[data-theme]') : [];
+
+            if (themeBtn && themeList) {
+                themeBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isExpanded = themeBtn.getAttribute('aria-expanded') === 'true';
+                    themeBtn.setAttribute('aria-expanded', !isExpanded);
+                    themeList.classList.toggle('show');
+                });
+
+                themeOptions.forEach(button => {
+                    button.addEventListener('click', () => {
+                        const themeName = button.getAttribute('data-theme');
+                        setTheme(themeName);
+                        if (themeList.classList.contains('show')) {
+                            themeBtn.setAttribute('aria-expanded', 'false');
+                            themeList.classList.remove('show');
+                        }
+                    });
+                });
+
+                document.addEventListener('click', (e) => {
+                    if (themeList.classList.contains('show') && !themeList.contains(e.target) && !themeBtn.contains(e.target)) {
+                        themeBtn.setAttribute('aria-expanded', 'false');
+                        themeList.classList.remove('show');
+                    }
+                });
+            }
+
+            // Populate governorates and districts if functions exist in app.js
+            if (typeof populateGovernorates === 'function') {
+                populateGovernorates();
+            }
+        });
+
+        // Listener for language change on the select element
+        document.addEventListener('change', (e) => {
+            if (e.target && e.target.id === 'langSelect') {
+                loadLanguage(e.target.value); // Use loadLanguage from app.js
+            }
+        });
+    </script>
+</body>
+
+</html>

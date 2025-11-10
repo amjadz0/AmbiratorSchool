@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>نظام المستويات التفاعلي</title>
+    <style>
+        :root {
+            --primary-color: #4a6cf7;
+            --button-bg: #f5f8ff;
+            --text-color: #333;
+            --border-color: #e1e5ee;
+            
+            /* ألوان للمستويات المختلفة */
+            --color-0-25: #ff6b6b;    /* أحمر للقيم المنخفضة */
+            --color-25-50: #ffa726;   /* برتقالي */
+            --color-50-75: #4caf50;   /* أخضر */
+            --color-75-100: #2196f3;  /* أزرق */
+            --color-100: #9c27b0;     /* بنفسجي للكمال */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9fafb;
+            color: var(--text-color);
+            padding: 20px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+        }
+
+        .levels-view {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .level-item {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            background: white;
+            padding: 25px;
+            border-radius: 16px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .level-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+        }
+
+        .circle-container {
+            position: relative;
+            width: 160px;
+            height: 160px;
+        }
+
+        .main-circle {
+            position: relative;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background-color: var(--button-bg);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+            margin: 10px;
+        }
+
+        /* أشكال الدائرة المختلفة */
+        .main-circle.quarter-circle {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 100%, 0 50%);
+        }
+
+        .main-circle.half-circle {
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 50%);
+        }
+
+        .main-circle.three-quarter-circle {
+            clip-path: polygon(0 0, 100% 0, 100% 50%, 100% 100%, 0 100%);
+        }
+
+        .main-circle:hover,
+        .main-circle:focus-within {
+            color: white;
+            transform: scale(1.05);
+        }
+
+        .circle-progress {
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            background: conic-gradient(var(--primary-color) 0deg, transparent 0deg);
+            z-index: 0;
+            transition: all 0.5s ease;
+        }
+
+        .circle-content {
+            position: relative;
+            z-index: 1;
+            background: white;
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        .circle-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .circle-label {
+            font-weight: bold;
+            font-size: 14px;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .level-indicator {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.9);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        .side-ranges {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            flex: 1;
+            max-width: 300px;
+        }
+
+        .mini-range-group {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .mini-label {
+            font-size: 14px;
+            font-weight: 600;
+            min-width: 70px;
+            text-align: right;
+            color: #555;
+        }
+
+        .mini-range {
+            flex: 1;
+            height: 8px;
+            border-radius: 4px;
+            background: #e9ecef;
+            outline: none;
+            accent-color: var(--primary-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .range-value {
+            font-size: 13px;
+            font-weight: 600;
+            min-width: 30px;
+            text-align: center;
+            color: var(--primary-color);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 30px;
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .color-legend {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .color-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+        }
+
+        .color-box {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .level-item {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .mini-range-group {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .mini-label {
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="section-title">نظام المستويات التفاعلي</h1>
+        
+        <section class="levels-view" aria-label="عرض المستويات">
+            <div class="level-item">
+                <div class="circle-container">
+                    <div class="circle-progress" id="reading-progress"></div>
+                    <div class="main-circle" id="reading-circle">
+                        <div class="circle-content">
+                            <div class="circle-value" id="reading-value">76%</div>
+                            <span class="circle-label">القراءة</span>
+                        </div>
+                    </div>
+                    <div class="level-indicator" id="reading-indicator">مستوى جيد</div>
+                </div>
+
+                <div class="side-ranges">
+                    <div class="mini-range-group">
+                        <label class="mini-label">التركيز</label>
+                        <input type="range" min="0" max="100" value="70" class="mini-range" data-skill="focus">
+                        <span class="range-value">70%</span>
+                    </div>
+                    <div class="mini-range-group">
+                        <label class="mini-label">الفهم</label>
+                        <input type="range" min="0" max="100" value="80" class="mini-range" data-skill="comprehension">
+                        <span class="range-value">80%</span>
+                    </div>
+                    <div class="mini-range-group">
+                        <label class="mini-label">السرعة</label>
+                        <input type="range" min="0" max="100" value="65" class="mini-range" data-skill="speed">
+                        <span class="range-value">65%</span>
+                    </div>
+                    <div class="mini-range-group">
+                        <label class="mini-label">الدقة</label>
+                        <input type="range" min="0" max="100" value="90" class="mini-range" data-skill="accuracy">
+                        <span class="range-value">90%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="level-item">
+                <div class="circle-container">
+                    <div class="circle-progress" id="writing-progress"></div>
+                    <div class="main-circle" id="writing-circle">
+                        <div class="circle-content">
+                            <div class="circle-value" id="writing-value">60%</div>
+                            <span class="circle-label">الكتابة</span>
+                        </div>
+                    </div>
+                    <div class="level-indicator" id="writing-indicator">مستوى متوسط</div>
+                </div>
+
+                <div class="side-ranges">
+                    <div class="mini-range-group">
+                        <label class="mini-label">التنظيم</label>
+                        <input type="range" min="0" max="100" value="70" class="mini-range" data-skill="organization">
+                        <span class="range-value">70%</span>
+                    </div>
+                    <div class="mini-range-group">
+                        <label class="mini-label">القواعد</label>
+                        <input type="range" min="0" max="100" value="50" class="mini-range" data-skill="grammar">
+                        <span class="range-value">50%</span>
+                    </div>
+                    <div class="mini-range-group">
+                        <label class="mini-label">الإبداع</label>
+                        <input type="range" min="0" max="100" value="65" class="mini-range" data-skill="creativity">
+                        <span class="range-value">65%</span>
+                    </div>
+                    <div class="mini-range-group">
+                        <label class="mini-label">الوضوح</label>
+                        <input type="range" min="0" max="100" value="55" class="mini-range" data-skill="clarity">
+                        <span class="range-value">55%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- دليل الألوان -->
+        
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // تحديث جميع الدوائر عند تحميل الصفحة
+            updateAllCircles();
+            
+            // إضافة مستمعي الأحداث لمقابض النطاق
+            const allRanges = document.querySelectorAll('.mini-range');
+            allRanges.forEach(range => {
+                range.addEventListener('input', function() {
+                    // تحديث القيمة المعروضة بجانب المقبض
+                    this.nextElementSibling.textContent = this.value + '%';
+                    
+                    // تحديث الدائرة الرئيسية
+                    updateMainCircle(this);
+                });
+            });
+            
+            function updateAllCircles() {
+                // تحديث جميع الدوائر عند تحميل الصفحة
+                const levelItems = document.querySelectorAll('.level-item');
+                levelItems.forEach(item => {
+                    const ranges = item.querySelectorAll('.mini-range');
+                    updateCircle(item, ranges);
+                });
+            }
+            
+            function updateMainCircle(rangeElement) {
+                const levelItem = rangeElement.closest('.level-item');
+                const ranges = levelItem.querySelectorAll('.mini-range');
+                updateCircle(levelItem, ranges);
+            }
+            
+            function updateCircle(levelItem, ranges) {
+                // حساب المتوسط
+                let total = 0;
+                ranges.forEach(range => {
+                    total += parseInt(range.value);
+                });
+                const average = Math.round(total / ranges.length);
+                
+                // تحديث القيمة في الدائرة
+                const circleValue = levelItem.querySelector('.circle-value');
+                circleValue.textContent = average + '%';
+                
+                // تحديث حدود الدائرة واللون
+                const circleProgress = levelItem.querySelector('.circle-progress');
+                const mainCircle = levelItem.querySelector('.main-circle');
+                const levelIndicator = levelItem.querySelector('.level-indicator');
+                
+                const degrees = (average / 100) * 360;
+                
+                // تحديد اللون بناءً على النسبة
+                let currentColor, levelText;
+                
+                if (average <= 25) {
+                    currentColor = 'var(--color-0-25)';
+                    levelText = 'مستوى منخفض';
+                } else if (average <= 50) {
+                    currentColor = 'var(--color-25-50)';
+                    levelText = 'مستوى متوسط';
+                } else if (average <= 75) {
+                    currentColor = 'var(--color-50-75)';
+                    levelText = 'مستوى جيد';
+                } else if (average < 100) {
+                    currentColor = 'var(--color-75-100)';
+                    levelText = 'مستوى ممتاز';
+                } else {
+                    currentColor = 'var(--color-100)';
+                    levelText = 'مستوى مثالي';
+                }
+                
+                // تطبيق اللون على حدود الدائرة
+                circleProgress.style.background = `conic-gradient(${currentColor} ${degrees}deg, transparent ${degrees}deg)`;
+                
+                // تحديث ألوان النطاقات
+                const miniRanges = levelItem.querySelectorAll('.mini-range');
+                miniRanges.forEach(range => {
+                    range.style.accentColor = currentColor;
+                });
+                
+                // تحديث ألوان النصوص
+                circleValue.style.color = currentColor;
+                levelIndicator.textContent = levelText;
+                levelIndicator.style.background = currentColor;
+                levelIndicator.style.color = 'white';
+                
+                // تحديث شكل الدائرة
+                mainCircle.classList.remove('quarter-circle', 'half-circle', 'three-quarter-circle');
+                
+                if (average <= 25) {
+                    mainCircle.classList.add('quarter-circle');
+                } else if (average <= 50) {
+                    mainCircle.classList.add('half-circle');
+                } else if (average <= 75) {
+                    mainCircle.classList.add('three-quarter-circle');
+                }
+                
+                // تحديث لون خلفية الدائرة عند hover
+                mainCircle.style.setProperty('--primary-color', currentColor);
+            }
+        });
+    </script>
+</body>
+</html>

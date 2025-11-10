@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+    <meta name="description" content=" تعليم بطريقة ممتعة وشاملة مع افضل المعمل الاكتروني والالعاب المفيدة والممتعه واكثر من 1000 سؤال وزاري وتقيم مستوئ الطالب وتحليل مستوئ الطالب و متابعة الطالب 24ساعة وتحديد نقاط الضعف والقوةوتحديد التخصص الجامعي المناسب وتعليمة وتدريبة على مهارت اخرئ مثل الاستثمار والتجارة و البرمجة لتشجيع الطالب على التعليم">
+    <meta name="keywords" content="">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="expires" content="wed,1 7 2026 00:00:00 GMT">
+    <meta property="og:title" content="عالم امبراطورية المدراسة الجديدة">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="تعليم بطريقة ممتعة وشاملة مع افضل المعمل الاكتروني والالعاب المفيدة والممتعه واكثر من 1000 سؤال وزاري وتقيم مستوئ الطالب وتحليل مستوئ الطالب و متابعة الطالب 24ساعة وتحديد نقاط الضعف والقوةوتحديد التخصص الجامعي المناسب وتعليمة وتدريبة على مهارت اخرئ مثل الاستثمار والتجارة و البرمجة لتشجيع الطالب على التعليم">
+    <meta property="og:url" content="www.NewSchoolEmpireWorld.net">
+    <meta property="og:image" content="">
+    <meta property="og:image:height" content="">
+    <meta property="og:image:width" content="">
+    <link rel="shortcut icon" href="../../image/Pigeon Post__an__s2x.png" type="image/x-icon">
+    <link rel="stylesheet" href="">
+
+    <title>صفحة الإدارة - تأكيد الحوالات</title>
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background: #f2f2f2;
+            color: #111;
+            padding: 20px;
+            text-align: center;
+            transition: background 0.3s;
+        }
+        
+        .container {
+            background: #fff;
+            border-radius: 15px;
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        input,
+        button,
+        select {
+            padding: 10px;
+            width: 90%;
+            margin: 10px auto;
+            font-size: 16px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            display: block;
+        }
+        
+        button {
+            background-color: #28a745;
+            color: #fff;
+            cursor: pointer;
+            border: none;
+        }
+        
+        button.reject {
+            background-color: crimson;
+        }
+        
+        .message {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        
+        .entry {
+            background: #f9f9f9;
+            padding: 15px;
+            border-radius: 12px;
+            margin-top: 15px;
+            border: 1px solid #ccc;
+        }
+        
+        select,
+        .lang-toggle {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="lang-toggle">
+        <label>اختر اللغة:</label>
+        <select id="langSelect">
+    <option value="ar">العربية</option>
+    <option value="en">English</option>
+    <option value="jp">日本語</option>
+    <option value="ko">한국어</option>
+    <option value="cn">中文</option>
+    <option value="es">Español</option>
+    <option value="fr">Français</option>
+    <option value="it">Italiano</option>
+  </select>
+    </div>
+
+    <div class="container">
+        <h2 id="title">تأكيد الحوالات</h2>
+
+        <input type="password" id="adminPass" placeholder="كلمة المرور" />
+        <button id="loginBtn">دخول</button>
+
+        <div id="entries" style="display:none;"></div>
+        <p class="message" id="msg"></p>
+    </div>
+
+    <script>
+        const translations = {
+            ar: {
+                title: "تأكيد الحوالات",
+                password: "كلمة المرور",
+                login: "دخول",
+                noData: "لا توجد حوالات في الانتظار.",
+                approve: "✅ تم الاستلام",
+                reject: "❌ لم يتم الاستلام",
+                approved: "✅ تم تأكيد الحوالة، المستخدم سينتقل.",
+                rejected: "❌ لم يتم استلام الحوالة، يرجى التواصل مع الدعم: 777123456"
+            },
+            en: {
+                title: "Transfer Confirmation",
+                password: "Password",
+                login: "Login",
+                noData: "No pending transfers.",
+                approve: "✅ Approved",
+                reject: "❌ Rejected",
+                approved: "✅ Transfer confirmed. User will proceed.",
+                rejected: "❌ Transfer not received. Contact support: 777123456"
+            },
+            jp: {
+                title: "送金確認",
+                password: "パスワード",
+                login: "ログイン",
+                noData: "保留中の送金はありません。",
+                approve: "✅ 承認",
+                reject: "❌ 拒否",
+                approved: "✅ 送金が確認されました。",
+                rejected: "❌ 送金が確認できません。サポートに連絡してください: 777123456"
+            },
+            ko: {
+                title: "송금 확인",
+                password: "비밀번호",
+                login: "로그인",
+                noData: "대기 중인 송금이 없습니다.",
+                approve: "✅ 승인됨",
+                reject: "❌ 거절됨",
+                approved: "✅ 송금이 확인되었습니다.",
+                rejected: "❌ 송금을 받지 못했습니다. 지원팀에 문의하세요: 777123456"
+            },
+            cn: {
+                title: "转账确认",
+                password: "密码",
+                login: "登录",
+                noData: "没有待处理的转账。",
+                approve: "✅ 已确认",
+                reject: "❌ 被拒绝",
+                approved: "✅ 转账已确认，用户将继续。",
+                rejected: "❌ 未收到转账，请联系支持：777123456"
+            },
+            es: {
+                title: "Confirmación de transferencia",
+                password: "Contraseña",
+                login: "Entrar",
+                noData: "No hay transferencias pendientes.",
+                approve: "✅ Aprobado",
+                reject: "❌ Rechazado",
+                approved: "✅ Transferencia confirmada.",
+                rejected: "❌ Transferencia no recibida. Contacte soporte: 777123456"
+            },
+            fr: {
+                title: "Confirmation de virement",
+                password: "Mot de passe",
+                login: "Connexion",
+                noData: "Aucun virement en attente.",
+                approve: "✅ Approuvé",
+                reject: "❌ Rejeté",
+                approved: "✅ Virement confirmé.",
+                rejected: "❌ Virement non reçu. Contactez le support : 777123456"
+            },
+            it: {
+                title: "Conferma bonifico",
+                password: "Password",
+                login: "Accedi",
+                noData: "Nessun bonifico in attesa.",
+                approve: "✅ Confermato",
+                reject: "❌ Rifiutato",
+                approved: "✅ Bonifico confermato.",
+                rejected: "❌ Bonifico non ricevuto. Contattare supporto: 777123456"
+            }
+        };
+
+        const langSelect = document.getElementById("langSelect");
+        const title = document.getElementById("title");
+        const passInput = document.getElementById("adminPass");
+        const loginBtn = document.getElementById("loginBtn");
+        const msg = document.getElementById("msg");
+        const entriesDiv = document.getElementById("entries");
+        const password = "amjad";
+
+        function updateLang() {
+            const lang = langSelect.value;
+            const t = translations[lang];
+            title.textContent = t.title;
+            passInput.placeholder = t.password;
+            loginBtn.textContent = t.login;
+        }
+
+        langSelect.addEventListener("change", updateLang);
+        updateLang();
+
+        loginBtn.onclick = () => {
+            if (passInput.value !== password) {
+                msg.textContent = "❌ كلمة المرور غير صحيحة";
+                msg.style.color = "red";
+                return;
+            }
+
+            const sender = localStorage.getItem("sender");
+            const account = localStorage.getItem("account");
+            const status = localStorage.getItem("status");
+            const lang = langSelect.value;
+            const t = translations[lang];
+
+            msg.textContent = "";
+            entriesDiv.style.display = "block";
+            entriesDiv.innerHTML = "";
+
+            if (!sender || !account || status !== "pending") {
+                entriesDiv.textContent = t.noData;
+                return;
+            }
+
+            const div = document.createElement("div");
+            div.className = "entry";
+            div.innerHTML = `
+    🧍‍♂️ ${sender}<br>
+    🏦 ${account}<br><br>
+    <button class="approve">${t.approve}</button>
+    <button class="reject">${t.reject}</button>
+    <p class="message"></p>
+  `;
+
+            const message = div.querySelector(".message");
+
+            div.querySelector(".approve").onclick = () => {
+                localStorage.setItem("status", "approved");
+                message.textContent = t.approved;
+                message.style.color = "green";
+            };
+
+            div.querySelector(".reject").onclick = () => {
+                localStorage.setItem("status", "rejected");
+                message.textContent = t.rejected;
+                message.style.color = "crimson";
+            };
+
+            entriesDiv.appendChild(div);
+        };
+    </script>
+</body>
+
+</html>
